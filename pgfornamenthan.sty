@@ -1,0 +1,96 @@
+% authors: pgf and LaTeX code by LIM LianTze
+%          based on CAD drawing by ZHANG Chennan
+% 24/12/2017
+\ProvidesPackage{pgfornamenthan}
+\RequirePackage{xpatch}
+\RequirePackage{pgfornament}
+
+\def\pgfornamenthan{\pgfutil@ifnextchar[{\pgf@ornamenthan}{\pgf@ornamenthan[]}}%
+\let\pgf@ornamenthan\pgf@ornament
+\xpatchcmd{\pgf@ornamenthan}{\@pgfornamentDim}{\@pgfornamenthanDim}{}{}
+\xpatchcmd{\pgf@ornamenthan}{\@pgfornamentDim}{\@pgfornamenthanDim}{}{}
+\xpatchcmd{\pgf@ornamenthan}{\pgf@@ornament}{\pgf@@ornamenthan}{}{}
+
+\let\pgf@@ornamenthan\pgf@@ornament
+% \patchcmd{\pgf@@ornamenthan}{\OrnamentsFamily}{han}{}{}
+\pretocmd{\pgf@@ornamenthan}{\def\OrnamentsFamily{han}}{}{}
+
+\tikzset{
+  ornamenthan/.style={%
+    to path={%
+      \pgfextra{%
+      \tikz@scan@one@point\pgfutil@firstofone(\tikztostart)\relax
+         \pgf@xa=\pgf@x
+         \pgf@ya=\pgf@y
+      \tikz@scan@one@point\pgfutil@firstofone(\tikztotarget)\relax
+         \pgf@xb=\pgf@x
+         \pgf@yb=\pgf@y
+         \advance\pgf@xa by-\pgf@xb
+         \advance\pgf@ya by-\pgf@yb
+      \pgfmathveclen{\pgf@xa}{\pgf@ya}%
+      \global\let\ornamentlen\pgfmathresult}
+	     --  node [pos=\ornamenttopos,options,
+		          anchor=\ornamenttoanchor]{%
+        \pgfornamenthan[width    = \ornamentlen,
+		             symmetry=\ornamenttosymmetry]{#1}}
+            (\tikztotarget)\tikztonodes %end pgfextra
+    }% end to path
+  }% end style
+}
+
+
+\def\@pgfornamenthanDim#1{% dim en bp
+\ifcase#1\relax%
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  1
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  2
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  3
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  4
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  5
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  6
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  7
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  8
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  9
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  10
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  11
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  12
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  13
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  14
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  15
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  16
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  17
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  18
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  19
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  20
+\or\def\@pgfornamentX{260.5}\def\@pgfornamentY{260.5}%  21
+\or\def\@pgfornamentX{260.5}\def\@pgfornamentY{260.5}%  22
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  23
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  24
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  25
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  26
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  27
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}%  28
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{10.5}%  29
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{10.5}%  30
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{40.5}%  31
+\or\def\@pgfornamentX{200.5}\def\@pgfornamentY{40.5}%  32
+\else\def\@pgfornamentX{200.5}\def\@pgfornamentY{200.5}  %% Assume square
+\fi%
+}%
+
+
+% \def\pgf@@ornamenthan#1{%
+% \begingroup
+% \def\i{\pgfusepath{clip}}%
+% \def\k{\pgfusepath{stroke}}%
+% \let\o\pgfpathclose
+% \let\s\pgfusepathqfillstroke
+% \def\p ##1##2{\pgfqpoint{##1bp}{##2bp}}%
+% \def\m ##1 ##2 {\pgfpathmoveto{\p{##1}{##2}}}%
+% \def\l ##1 ##2 {\pgfpathlineto{\p{##1}{##2}}}%
+% \def\r ##1 ##2 ##3 ##4 {\pgfpathrectangle{\p{##1}{##2}}{\p{##3}{##4}}}%
+% \def\c ##1 ##2 ##3 ##4 ##5 ##6 {%
+% \pgfpathcurveto{\p{##1}{##2}}{\p{##3}{##4}}{\p{##5}{##6}}}%
+% \@@input han#1.pgf
+% %\@nameuse{pgf@@am@#1}%
+% \endgroup}%
+\endinput
