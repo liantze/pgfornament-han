@@ -1,4 +1,4 @@
-# pgfornament-han
+# pgfornament-han v0.1 2017/12/28
 A pgfornament library for Chinese traditional motifs and patterns.
 
 以 pgfornament 宏包的机制，实现绘制汉风图纹。
@@ -9,7 +9,7 @@ A pgfornament library for Chinese traditional motifs and patterns.
 # Contributors 开发人员
 ZHANG Chennan drew the motifs using a CAD application,
 re-drew them in `TikZ`, and granted permission for these to be turned into
-a library suitable for use with the `pgfornament` package.
+a library suitable for use with the `pgfornament` package by LIM LianTze.
 
 所有图纹都是由张晨南以 CAD 设计、以TikZ绘制，再由林莲枝转为适用 pgfornament 机制的宏包代码。
 
