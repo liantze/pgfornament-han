@@ -94,7 +94,7 @@
 
 % \emph{（这不是正式帮助文档，只是暂时性的测试文档，内容极大可能会变动。）}
 
-\section{基本用法}
+\part{基本用法}
 
 \texttt{n} 为图纹编号的话，最简单的用法是 \mintinline{latex}{\pgfornamenthan[color=red,width=1.5cm]{n}}。也可以用 \texttt{height} 或者 \texttt{scale} 设定大小。注意图纹比例是不变的，因此只有最后给出的选项有效。此外 \texttt{symmetry} 参数可以实现3种镜像，\texttt{v} (垂直）、\texttt{h}（水平）、\texttt{c}（中心=垂直+水平镜像），画边框的四个角点时很好用。
 
@@ -220,16 +220,16 @@ TikZ 选项的应用：
 
 \end{tcblisting}
 
-\section{纹样列表}
+\part{纹样列表}
 
 以下部件的原宽度、原高度皆以1bp为单元。
 
 
 \setlength{\parindent}{0pt}\raggedright
 
-\subsection{角点符号}
+\section{角点符号}
 
-\subsubsection{接单线的角点符号}
+\subsection{接单线的角点符号}
 
 有实心线型与对应的空心线型两种。以下皆同。
 
@@ -246,7 +246,7 @@ TikZ 选项的应用：
   \end{tikzpicture}\space\space
 }
 
-\subsubsection{接双线的角点符号}
+\subsection{接双线的角点符号}
 
 \foreach \n in {9,...,14}{%
   \begin{tikzpicture}
@@ -259,7 +259,7 @@ TikZ 选项的应用：
 }
 
 
-\subsubsection{简单角点符号}
+\subsection{简单角点符号}
 
 和其他角点符号配合，在一条对角线上使用其他角点符号，另一条对角 线上使用简单角点符号。
 
@@ -275,7 +275,7 @@ TikZ 选项的应用：
   \end{tikzpicture}\space\space
 }
 
-\subsubsection{回纹的角点符号}
+\subsection{回纹的角点符号}
 
 和连续的回纹配合。
 
