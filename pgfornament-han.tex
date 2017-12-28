@@ -162,12 +162,12 @@ TikZ 选项的应用：
 \end{tcblisting}
 
 
-\begin{tcblisting}{title=有些部件需要手动\texttt{yshift}}
+\begin{tcblisting}{title=有些部件衔接可能需要手动\texttt{shift}}
   \begin{tikzpicture}\tikzset{every node/.append style={赤金,inner sep=0pt}}
-    \node (nw) {\pgfornamenthan[scale=0.2]{21}};
-    \node[right=50bp of nw] (ne) {\pgfornamenthan[scale=0.2,symmetry=v]{21}};
-    \node[anchor=north west,yshift=-4bp] at (nw.north east) {\pgfornamenthan[scale=0.2]{37}};
-    \node[anchor=north east,yshift=-4bp] at (ne.north west) {\pgfornamenthan[scale=0.2,symmetry=v]{37}};
+    \node (nw) {\pgfornamenthan[scale=0.2]{23}};
+    \node[right=53bp of nw] (ne) {\pgfornamenthan[scale=0.2,symmetry=v]{23}};
+    \node[anchor=north west,xshift=2bp] at (nw.north east) {\pgfornamenthan[scale=0.2]{41}};
+    \node[anchor=north east,xshift=-2bp] at (ne.north west) {\pgfornamenthan[scale=0.2,symmetry=v]{41}};
   \end{tikzpicture}
 \end{tcblisting}
 
