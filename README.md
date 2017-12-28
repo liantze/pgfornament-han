@@ -1,7 +1,7 @@
 # pgfornament-han
 A pgfornament library for Chinese traditional motifs and patterns.
 
-以 pgfornmanet 宏包的机制，实现绘制汉风图纹。
+以 pgfornament 宏包的机制，实现绘制汉风图纹。
 
 # Maintainers 宏包维护
 @liantze

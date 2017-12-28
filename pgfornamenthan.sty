@@ -18,12 +18,6 @@
 % \patchcmd{\pgf@@ornamenthan}{\OrnamentsFamily}{han}{}{}
 \pretocmd{\pgf@@ornamenthan}{%
   \def\OrnamentsFamily{han}
-  % \pgfkeys{
-  % /pgfOrnamentsHan/object/.cd,
-  % /pgfOrnaments/object/.code = \def\pgfOrnamentsObject{pgflibrary#1.code.tex}
-  % \def\OrnamentsFamily{#1}
-  % }
-  % \ProcessPgfOptions{/pgfOrnaments}
 }{}{}
 
 \patchcmd{\pgf@@ornamenthan}

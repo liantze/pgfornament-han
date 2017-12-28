@@ -5,17 +5,23 @@
 \usepackage{pgfornamenthan}
 \usetikzlibrary{chains}
 \usetikzlibrary{calc}
-% \usetikzlibrary{positioning}
 \usetikzlibrary{decorations.text}
-\usepackage{tikzrput}
 
 \usepackage{cncolours}
 
-\usepackage{fullpage}
+\usepackage{geometry}
+\geometry{margin=1in,headheight=10pt}
+
 \usepackage{tcolorbox}
 \tcbuselibrary{minted}
 \setminted{breaksymbolleft={},breakindent=\ccwd}
+\tcbset{fonttitle=\kaishu\large\bfseries,colback=铅白!60!white,colbacktitle=绀青,coltitle=精白,colframe=墨灰}
 
+\makeatletter
+\newcommand{\getpgfornamenthanDim}[1]{%
+ {\@pgfornamenthanDim{#1}宽：\@pgfornamentX\\高：\@pgfornamentY}%
+}
+\makeatother
 
 \usepackage{fancyhdr}
 \fancyhf{}
@@ -62,30 +68,35 @@
 %
 %% 严格来说应该放在 \fancyfoot 吧，算了一样啦
 \node[yshift=32pt,铜绿] at (current page.south) {\pgfornamenthan[scale=0.14]{51}};
-\node[yshift=32pt,text=black] at (current page.south) {\thepage};
+\node[yshift=32pt,text=black] at (current page.south) {\large\thepage};
 %
 \end{tikzpicture}
 }
 
 \pagestyle{fancy}
 \fancypagestyle{plain}{\pagestyle{fancy}}
+% \pagestyle{empty}
 
-\title{汉风图纹 pgfornament-han}
+\usepackage[hidelinks]{hyperref}
+
+\title{汉风图纹 \texttt{pgfornament-han} v0.1}
 \author{林莲枝、张晨南}
+\date{v0.1 \today\\\url{https://github.com/liantze/pgfornament-han}}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-利用 pgfornament 宏包可以在 \LaTeX{} 文件里便捷地画出十分典雅漂亮的、欧式风格的花纹。pgfornament-han 宏包的用意，正是为了尝试用 pgfornament 的已有机制，提供一些汉风的传统图纹。所有图纹均由\emph{张晨南}以 CAD 程式设计、以 TikZ 画图，再由\emph{林莲枝}转为适合 pgfornament 机制使用的宏包代码。
+利用 \texttt{pgfornament} 宏包可以在 \LaTeX{} 文件里便捷地画出十分典雅漂亮的、欧式风格的花纹。（详情请自行访问 \url{http://ctan.org/pkg/pgfornament}。）
+\texttt{pgfornament-han} 宏包的用意，正是为了尝试用 \texttt{pgfornament} 的已有机制，提供一些汉风的传统图纹。所有图纹均由\emph{张晨南}以 CAD 程式定稿、TikZ 绘制，再由\emph{林莲枝}转为适合 \texttt{pgfornament} 机制使用的宏包代码。
 \end{abstract}
 
-\emph{（这不是正式帮助文档，只是暂时性的测试文档，内容极大可能会变动。）}
+% \emph{（这不是正式帮助文档，只是暂时性的测试文档，内容极大可能会变动。）}
 
 \section{基本用法}
 
-\texttt{n} 为图纹编号的话，最简单的用法是 \mintinline{latex}{\pgfornamenthan[color=red,width=1.5cm]{n}}。也可以用 \texttt{height} 或者 \texttt{scale} 设定大小。注意图纹比例是不变的，因此只有最后给出的选项有效。
+\texttt{n} 为图纹编号的话，最简单的用法是 \mintinline{latex}{\pgfornamenthan[color=red,width=1.5cm]{n}}。也可以用 \texttt{height} 或者 \texttt{scale} 设定大小。注意图纹比例是不变的，因此只有最后给出的选项有效。此外 \texttt{symmetry} 参数可以实现3种镜像，\texttt{v} (垂直）、\texttt{h}（水平）、\texttt{c}（中心=垂直+水平镜像），画边框的四个角点时很好用。
 
 TikZ 选项的应用：
 \begin{minted}{latex}
@@ -111,30 +122,9 @@ TikZ 选项的应用：
 \end{tikzpicture}
 \end{tcblisting}
 
+\enlargethispage{\baselineskip}
 
-\begin{tcblisting}{title={一个简单的边框范例}}
-\begin{tikzpicture}
-  \tikzset{every node/.append style={铜绿,inner sep=0pt}}
-  \node (nw) {\pgfornamenthan[scale=0.25]{12}};
-  \node[right=50bp of nw] (ne) {\pgfornamenthan[scale=0.25,symmetry=v]{12}};
-  \node[below=50bp of nw] (sw) {\pgfornamenthan[scale=0.25,symmetry=h]{12}};
-  \node[below=50bp of ne] (se) {\pgfornamenthan[scale=0.25,symmetry=c]{12}};
-
-  % 每个部件原宽度为200bp,因此绘画时如果以bp作为单位，会比较容易计算xscale的值。
-  % 这里 scale=0.25 则部件有效宽度为50bp，刚好是两个角点符号之间的距离（参照
-  % 上面4行代码），因此不需要再设 xscale。
-  \node[anchor=north west] at (nw.north east) {\pgfornamenthan[scale=0.25]{32}};
-  \node[anchor=south west] at (sw.south east) {\pgfornamenthan[scale=0.25]{32}};
-  \node[anchor=south west,rotate=-90] at (nw.south west) {\pgfornamenthan[scale=0.25]{32}};
-  \node[anchor=south east,rotate=90] at (ne.south east) {\pgfornamenthan[scale=0.25]{32}};
-
-  \node[anchor=center,靛蓝,shift={(25bp,-25bp)}] at (nw.south east) {\pgfornamenthan[scale=0.5]{56}};
-\end{tikzpicture}
-\end{tcblisting}
-
-
-
-\begin{tcblisting}{title={另一个简单的边框范例}}
+\begin{tcblisting}{title={简单的边框范例}}
 
 \begin{tikzpicture}[x=1pt,y=1pt]
     \tikzset{every node/.append style={inner sep=0pt,color=胭脂}}
@@ -154,63 +144,287 @@ TikZ 选项的应用：
 \end{tikzpicture}
 \end{tcblisting}
 
+\begin{tcblisting}{title={另一个简单的边框范例}}
+\begin{tikzpicture}
+  \tikzset{every node/.append style={铜绿,inner sep=0pt}}
+  \node (nw) {\pgfornamenthan[scale=0.25]{12}};
+  \node[right=50bp of nw] (ne) {\pgfornamenthan[scale=0.25,symmetry=v]{12}};
+  \node[below=50bp of nw] (sw) {\pgfornamenthan[scale=0.25,symmetry=h]{12}};
+  \node[below=50bp of ne] (se) {\pgfornamenthan[scale=0.25,symmetry=c]{12}};
+  % 每个部件原宽度为200bp,因此绘画时如果以bp作为单位，会比较容易计算xscale的值。这里 scale=0.25 则部件有效宽度为50bp，刚好是两个角点符号之间的距离，因此不需要再设 xscale。
+  \node[anchor=north west] at (nw.north east) {\pgfornamenthan[scale=0.25]{32}};
+  \node[anchor=south west] at (sw.south east) {\pgfornamenthan[scale=0.25]{32}};
+  \node[anchor=south west,rotate=-90] at (nw.south west) {\pgfornamenthan[scale=0.25]{32}};
+  \node[anchor=south east,rotate=90] at (ne.south east) {\pgfornamenthan[scale=0.25]{32}};
+
+  \node[anchor=center,靛蓝,shift={(25bp,-25bp)}] at (nw.south east) {\pgfornamenthan[scale=0.5]{57}};
+\end{tikzpicture}
+\end{tcblisting}
+
+
+\begin{tcblisting}{title=有些部件需要手动\texttt{yshift}}
+  \begin{tikzpicture}\tikzset{every node/.append style={赤金,inner sep=0pt}}
+    \node (nw) {\pgfornamenthan[scale=0.2]{21}};
+    \node[right=50bp of nw] (ne) {\pgfornamenthan[scale=0.2,symmetry=v]{21}};
+    \node[anchor=north west,yshift=-4bp] at (nw.north east) {\pgfornamenthan[scale=0.2]{37}};
+    \node[anchor=north east,yshift=-4bp] at (ne.north west) {\pgfornamenthan[scale=0.2,symmetry=v]{37}};
+  \end{tikzpicture}
+\end{tcblisting}
+
+\begin{tcblisting}{listing only,title={框着整个页面的代码。很适合拿来设计奖状证书的有木有！}}
+
+  \tikzset{every node/.append style={inner sep=0pt,鸭卵青}}
+  \begin{tikzpicture}[overlay,remember picture]
+  \node[anchor=north west,shift={(14.5pt,-14.5pt)}] at (current page.north west)
+    (nw) {\pgfornamenthan[scale=0.2]{25}};
+  \node[anchor=north east,shift={(-14.5pt,-14.5pt)}] at (current page.north east)
+    (ne) {\pgfornamenthan[scale=0.2,symmetry=v]{25}};
+  \node[anchor=south west,shift={(14.5pt,14.5pt)}] at (current page.south west)
+    (sw) {\pgfornamenthan[scale=0.2,symmetry=h]{25}};
+  \node[anchor=south east,shift={(-14.5pt,14.5pt)}] at (current page.south east)
+    (se) {\pgfornamenthan[scale=0.2,symmetry=c]{25}};
+  %
+  \begin{scope}[start chain,node distance=0pt]
+  \node[anchor=north west,on chain] at (nw.north east) {\pgfornamenthan[scale=0.2]{47}};
+  \foreach \i in {1,...,15} {
+    \node[on chain]{\pgfornamenthan[scale=0.2]{47}};
+  }
+  \end{scope}
+  %
+  \begin{scope}[start chain,node distance=0pt]
+  \node[anchor=south west,on chain] at (sw.south east) {\pgfornamenthan[scale=0.2]{47}};
+  \foreach \i in {1,...,6} \node[on chain]{\pgfornamenthan[scale=0.2]{47}};
+  \end{scope}
+  %
+  \begin{scope}[start chain=going left,node distance=0pt]
+  \node[anchor=south east,on chain] at (se.south west) {\pgfornamenthan[scale=0.2]{47}};
+  \foreach \i in {1,...,6} \node[on chain]{\pgfornamenthan[scale=0.2]{47}};
+  \end{scope}
+  %
+  % 垂直的话 chains 比较不好控制，我懒得折腾了，直接用 \foreach。
+  % 自己算一下， (47) 长度 155. 那么 scale = 0.2 的话……
+  \foreach \i in {0,...,21}
+    \node[anchor=south west,rotate=-90,shift={($\i*(31bp,0)$)}] at (nw.south west)
+      {\pgfornamenthan[scale=0.2]{47}};
+  %
+  \foreach \i in {0,...,21}
+    \node[anchor=south east,rotate=90,shift={($\i*(-31bp,0)$)}] at (ne.south east)
+      {\pgfornamenthan[scale=0.2]{47}};
+  %
+  %% 严格来说应该放在 \fancyfoot 吧，算了一样啦
+  \node[yshift=32pt,铜绿] at (current page.south) {\pgfornamenthan[scale=0.14]{51}};
+  \node[yshift=32pt,text=black] at (current page.south) {\large\thepage};
+  %
+  \end{tikzpicture}
+  }
+
+\end{tcblisting}
 
 \section{纹样列表}
 
-\noindent\raggedright%
-\foreach \n in {1,...,32}{%
+以下部件的原宽度、原高度皆以1bp为单元。
+
+
+\setlength{\parindent}{0pt}\raggedright
+
+\subsection{角点符号}
+
+\subsubsection{接单线的角点符号}
+
+有实心线型与对应的空心线型两种。以下皆同。
+
+\bigskip
+
+
+\foreach \n in {1,...,8}{%
   \begin{tikzpicture}
     \fill[牙色](-1cm,-1cm) rectangle (1cm,1cm);
     \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,width=1.8cm]{\n}};
-    \node[inner sep=0pt,font=\footnotesize] at (0.8cm,-0.8cm) {\n};
-  \end{tikzpicture}\space
-}%
-%
-\noindent\raggedright%
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.8cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1cm) rectangle (2.8cm,1cm);
+  \end{tikzpicture}\space\space
+}
+
+\subsubsection{接双线的角点符号}
+
+\foreach \n in {9,...,14}{%
+  \begin{tikzpicture}
+    \fill[牙色](-1cm,-1cm) rectangle (1cm,1cm);
+    \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,width=1.8cm]{\n}};
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.8cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1cm) rectangle (2.8cm,1cm);
+  \end{tikzpicture}\space\space
+}
+
+
+\subsubsection{简单角点符号}
+
+和其他角点符号配合，在一条对角线上使用其他角点符号，另一条对角 线上使用简单角点符号。
+
+\bigskip
+
+\foreach \n in {15,...,18}{%
+  \begin{tikzpicture}
+    \fill[牙色](-1cm,-1cm) rectangle (1cm,1cm);
+    \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,width=1.8cm]{\n}};
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.8cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1cm) rectangle (2.8cm,1cm);
+  \end{tikzpicture}\space\space
+}
+
+\subsubsection{回纹的角点符号}
+
+和连续的回纹配合。
+
+\bigskip
+
+\foreach \n in {19,...,22}{%
+  \begin{tikzpicture}
+    \fill[牙色](-1cm,-1cm) rectangle (1cm,1cm);
+    \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,width=1.8cm]{\n}};
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.8cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1cm) rectangle (2.8cm,1cm);
+  \end{tikzpicture}\space\space
+}
+
+\bigskip\bigskip
+
+和离散的回纹配合。
+
+\bigskip
+
+\foreach \n in {23,...,28}{%
+  \begin{tikzpicture}
+    \fill[牙色](-1cm,-1cm) rectangle (1cm,1cm);
+    \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,width=1.8cm]{\n}};
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.8cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1cm) rectangle (2.8cm,1cm);
+  \end{tikzpicture}\space\space
+}
+
+
+\section{线型单元}
+
+\subsection{单线、双线直线}
+
+\foreach \n in {29,...,32}{%
+  \begin{tikzpicture}
+    \fill[牙色](-1cm,-1cm) rectangle (1cm,1cm);
+    \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,width=1.8cm]{\n}};
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.8cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1cm) rectangle (2.8cm,1cm);
+  \end{tikzpicture}\space\space
+}
+
+\subsection{回字纹}
+
+\subsubsection{连续}
+
 \foreach \n in {33,...,36}{%
   \begin{tikzpicture}
     \fill[牙色](-1cm,-1.1cm) rectangle (1cm,0.9cm);
     \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,height=0.6cm]{\n}};
-    \node[inner sep=0pt,font=\footnotesize] at (0.8cm,-0.9cm) {\n};
-  \end{tikzpicture}\space
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.9cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1.1cm) rectangle (2.8cm,0.9cm);
+  \end{tikzpicture}\space\space
 }%
 \foreach \n in {37,...,40}{%
   \begin{tikzpicture}
     \fill[牙色](-1cm,-1.1cm) rectangle (1cm,0.9cm);
     \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,height=1.1cm]{\n}};
-    \node[inner sep=0pt,font=\footnotesize] at (0.8cm,-0.9cm) {\n};
-  \end{tikzpicture}\space
-}%
-\foreach \n in {41,...,48}{%
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.9cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1.1cm) rectangle (2.8cm,0.9cm);
+  \end{tikzpicture}\space\space
+}
+
+\subsubsection{离散}
+
+\foreach \n in {41,...,44}{%
   \begin{tikzpicture}
     \fill[牙色](-1cm,-1.1cm) rectangle (1cm,0.9cm);
     \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,height=0.6cm]{\n}};
-    \node[inner sep=0pt,font=\footnotesize] at (0.8cm,-0.9cm) {\n};
-  \end{tikzpicture}\space
-}%
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.9cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1.1cm) rectangle (2.8cm,0.9cm);
+  \end{tikzpicture}\space\space
+}
 
-\noindent\raggedright%
+\subsubsection{离散连接}
+
+\foreach \n in {45,...,48}{%
+  \begin{tikzpicture}
+    \fill[牙色](-1cm,-1.1cm) rectangle (1cm,0.9cm);
+    \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,height=0.6cm]{\n}};
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.9cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1.1cm) rectangle (2.8cm,0.9cm);
+  \end{tikzpicture}\space\space
+}
+
+\subsubsection{圆周排布的回纹}
 \foreach \n in {49,...,54}{%
   \begin{tikzpicture}
     \fill[牙色](-1.5cm,-1.5cm) rectangle (1.5cm,1.5cm);
     \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,width=2.8cm]{\n}};
-    \node[inner sep=0pt,font=\footnotesize] at (0,0) {\n};
-  \end{tikzpicture}\space
-}%
-\foreach \n in {55,...,57}{%
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0,0) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.6cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1.5cm,-1.5cm) rectangle (3.5cm,1.5cm);
+  \end{tikzpicture}\space\space
+}
+
+\section{吉祥纹路}
+
+\subsection{福字纹}
+
+\foreach \n in {55}{%
   \begin{tikzpicture}
     \fill[牙色](-1cm,-1cm) rectangle (1cm,1cm);
     \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,width=1.8cm]{\n}};
-    \node[inner sep=0pt,font=\footnotesize] at (0.8cm,-0.8cm) {\n};
-  \end{tikzpicture}\space
-}%
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.8cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1cm) rectangle (2.8cm,1cm);
+  \end{tikzpicture}\space\space
+}
 
+\subsection{寿字纹}
 
+\foreach \n in {56,57}{%
+  \begin{tikzpicture}
+    \fill[牙色](-1cm,-1cm) rectangle (1cm,1cm);
+    \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,width=1.8cm]{\n}};
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.8cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1cm) rectangle (2.8cm,1cm);
+  \end{tikzpicture}\space\space
+}
+
+\vfill
+
+\begin{center}
+\begin{tikzpicture}
+  \tikzset{every node/.append style={铜绿,inner sep=0pt,node distance=0pt}}
+  \node (nw) {\pgfornamenthan[scale=0.2]{6}};
+  \node[right=100bp of nw] (ne) {\pgfornamenthan[scale=0.2,symmetry=v]{16}};
+  \node[below=-8bp of nw] (sw) {\pgfornamenthan[scale=0.2,symmetry=h]{16}};
+  \node[below=-8bp of ne] (se) {\pgfornamenthan[scale=0.2,symmetry=c]{6}};
+  \node[anchor=north west,xscale=2.5] at (nw.north east) {\pgfornamenthan[scale=0.2]{30}};
+  \node[anchor=south west,xscale=2.5] at (sw.south east) {\pgfornamenthan[scale=0.2]{30}};
+  \node[font=\kaishu\Large,text=black,shift={(50bp,4bp)}] at (nw.south east) {待续};
+\end{tikzpicture}
+\end{center}
 \end{document}
 % \bigskip
 
-\noindent%
-\raggedright%
+%
+%
 \foreach \n in {1,...,48}{%
 % \tikzset{every node/.append style={inner sep=0pt,line width=1}}%
 \tikzset{pgfornamentstyle/.append style={draw=藏蓝,fill=枣红,line width=1}}%
@@ -220,7 +434,7 @@ TikZ 选项的应用：
 }%
 \foreach \n in {49,...,54}{%
 % \tikzset{every node/.append style={inner sep=0pt,line width=1}}%
-\tikzset{pgfornamentstyle/.append style={draw=藏蓝,fill=枣红,line width=1}}%
+\tikzset{pgfornamentstyle/.append style={draw=藏蓝,fill=枣红,line width=0pt}}%
 \pgfornamenthan[width=4cm]{\n}%
 \tikzset{pgfornamentstyle/.append style={line width=1}}%
 \pgfornamenthan[width=4cm,symmetry=v,color=水色]{\n}
