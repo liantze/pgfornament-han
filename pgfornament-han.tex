@@ -1,4 +1,5 @@
-% !TEX option = --shell-escape
+% TEX option = --shell-escape
+% !TEX program = xelatex
 \documentclass{ctexart}
 
 \usepackage[dvipsnames]{xcolor}
@@ -13,8 +14,23 @@
 \geometry{margin=1in,headheight=10pt}
 
 \usepackage{tcolorbox}
-\tcbuselibrary{minted}
-\setminted{breaksymbolleft={},breakindent=\ccwd}
+
+
+%%%%%% 这段代码可以忽视，只是 --shell-escape 时调用 minted 不然就用 listings
+\ifnum\shellescape=1
+  \tcbuselibrary{minted}
+  \setminted{breaksymbolleft={},breakindent=\ccwd}
+  \newminted{latex}{}
+  \newmintinline{latex}{}
+\else
+  \tcbuselibrary{listings}
+  \newcommand{\latexinline}[1]{\lstinline|#1|}
+  \lstnewenvironment{latexcode}{\lstset{language={[LaTeX]TeX}}}{}
+  \lstset{basicstyle=\ttfamily}
+\fi
+%%%%%%%%
+
+
 \tcbset{fonttitle=\kaishu\large\bfseries,colback=铅白!60!white,colbacktitle=绀青,coltitle=精白,colframe=墨灰}
 
 \makeatletter
@@ -96,13 +112,15 @@
 
 \part{基本用法}
 
-\texttt{n} 为图纹编号的话，最简单的用法是 \mintinline{latex}{\pgfornamenthan[color=red,width=1.5cm]{n}}。也可以用 \texttt{height} 或者 \texttt{scale} 设定大小。注意图纹比例是不变的，因此只有最后给出的选项有效。此外 \texttt{symmetry} 参数可以实现3种镜像，\texttt{v} (垂直）、\texttt{h}（水平）、\texttt{c}（中心=垂直+水平镜像），画边框的四个角点时很好用。
+\texttt{n} 为图纹编号的话，最简单的用法是 \latexinline{\pgfornamenthan[color=red,width=1.5cm]{n}}。
+也可以用 \texttt{height} 或者 \texttt{scale} 设定大小。注意图纹比例是不变的，因此只有最后给出的选项有效。此外 \texttt{symmetry} 参数可以实现3种镜像，\texttt{v} (垂直）、\texttt{h}（水平）、\texttt{c}（中心=垂直+水平镜像），画边框的四个角点时很好用。
 
 TikZ 选项的应用：
-\begin{minted}{latex}
+
+\begin{latexcode}
 \tikzset{pgfornamentstyle/.append style={draw=black,fill=red,line width=1}}
 \pgfornamenthan[scale=2]{n}
-\end{minted}
+\end{latexcode}
 
 以下是一些范例。
 
