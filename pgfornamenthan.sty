@@ -1,4 +1,4 @@
-% pgfornamenthan.sty v0.1 2017/12/18
+% pgfornamenthan.sty v0.2 2018/02/11
 % Authors: pgf and LaTeX code by LIM LianTze
 %          based on CAD drawing by ZHANG Chennan
 
@@ -48,6 +48,10 @@
   }% end style
 }
 
+\patchcmd{\pgf@@ornamenthan}
+  {\begingroup}
+  {\begingroup\def\ubb{\pgfusepath{use as bounding box}}}
+  {}{}
 
 % \def\pgf@@ornamenthan#1{%
 % \begingroup

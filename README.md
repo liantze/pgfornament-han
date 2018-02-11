@@ -1,10 +1,10 @@
-# pgfornament-han v0.1 2017/12/28
+# pgfornament-han v0.2 2018/02/11
 A pgfornament library for Chinese traditional motifs and patterns.
 
 以 pgfornament 宏包的机制，实现绘制汉风图纹。
 
 # Maintainers 宏包维护
-@liantze
+LianTze Lim 林莲枝 (liantze@gmail.com)
 
 # Contributors 开发人员
 ZHANG Chennan drew the motifs using a CAD application,
