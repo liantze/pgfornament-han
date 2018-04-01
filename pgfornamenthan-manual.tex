@@ -1,4 +1,4 @@
-% TEX option = --shell-escape
+% !TEX option = --shell-escape
 % !TEX program = xelatex
 \documentclass{ctexart}
 
@@ -6,7 +6,8 @@
 \usepackage{pgfornamenthan}
 \usetikzlibrary{chains}
 \usetikzlibrary{calc}
-\usetikzlibrary{decorations.text}
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.text,decorations.markings}
 
 \usepackage{cncolours}
 
@@ -44,6 +45,8 @@
 \renewcommand{\headrule}{}
 
 \fancyhead[L]{%
+\newbox{\fortyseven}
+\savebox{\fortyseven}{\pgfornamenthan[scale=0.2,color=鸭卵青]{47}}
 \tikzset{every node/.append style={inner sep=0pt,鸭卵青}}
 \begin{tikzpicture}[overlay,remember picture]
 \node[anchor=north west,shift={(14.5pt,-14.5pt)}] at (current page.north west)
@@ -56,31 +59,31 @@
   (se) {\pgfornamenthan[scale=0.2,symmetry=c]{25}};
 %
 \begin{scope}[start chain,node distance=0pt]
-\node[anchor=north west,on chain] at (nw.north east) {\pgfornamenthan[scale=0.2]{47}};
+\node[anchor=north west,on chain] at (nw.north east) {\usebox{\fortyseven}};
 \foreach \i in {1,...,15} {
-  \node[on chain]{\pgfornamenthan[scale=0.2]{47}};
+  \node[on chain]{\usebox{\fortyseven}};
 }
 \end{scope}
 %
 \begin{scope}[start chain,node distance=0pt]
-\node[anchor=south west,on chain] at (sw.south east) {\pgfornamenthan[scale=0.2]{47}};
-\foreach \i in {1,...,6} \node[on chain]{\pgfornamenthan[scale=0.2]{47}};
+\node[anchor=south west,on chain] at (sw.south east) {\usebox{\fortyseven}};
+\foreach \i in {1,...,6} \node[on chain]{\usebox{\fortyseven}};
 \end{scope}
 %
 \begin{scope}[start chain=going left,node distance=0pt]
-\node[anchor=south east,on chain] at (se.south west) {\pgfornamenthan[scale=0.2]{47}};
-\foreach \i in {1,...,6} \node[on chain]{\pgfornamenthan[scale=0.2]{47}};
+\node[anchor=south east,on chain] at (se.south west) {\usebox{\fortyseven}};
+\foreach \i in {1,...,6} \node[on chain]{\usebox{\fortyseven}};
 \end{scope}
 %
 % 垂直的话 chains 比较不好控制，我懒得折腾了，直接用 \foreach。
 % 自己算一下， (47) 长度 155. 那么 scale = 0.2 的话……
 \foreach \i in {0,...,21}
   \node[anchor=south west,rotate=-90,shift={($\i*(31bp,0)$)}] at (nw.south west)
-    {\pgfornamenthan[scale=0.2]{47}};
+    {\usebox{\fortyseven}};
 %
 \foreach \i in {0,...,21}
   \node[anchor=south east,rotate=90,shift={($\i*(-31bp,0)$)}] at (ne.south east)
-    {\pgfornamenthan[scale=0.2]{47}};
+    {\usebox{\fortyseven}};
 %
 %% 严格来说应该放在 \fancyfoot 吧，算了一样啦
 \node[yshift=32pt,铜绿] at (current page.south) {\pgfornamenthan[scale=0.1]{51}};
@@ -91,13 +94,12 @@
 
 \pagestyle{fancy}
 \fancypagestyle{plain}{\pagestyle{fancy}}
-% \pagestyle{empty}
 
 \usepackage[hidelinks]{hyperref}
 
 \title{汉风图纹 \texttt{pgfornament-han} v0.2}
 \author{林莲枝、张晨南}
-\date{v0.2 \today\\\url{https://github.com/liantze/pgfornament-han}}
+\date{v0.2 2018/02/11\\\url{https://github.com/liantze/pgfornament-han}}
 
 \begin{document}
 
@@ -108,14 +110,10 @@
 \texttt{pgfornament-han} 宏包的用意，正是为了尝试用 \texttt{pgfornament} 的已有机制，提供一些汉风的传统图纹。所有图纹均由\emph{张晨南}以 CAD 程式定稿、TikZ 绘制，再由\emph{林莲枝}转为适合 \texttt{pgfornament} 机制使用的宏包代码。
 \end{abstract}
 
-% \emph{（这不是正式帮助文档，只是暂时性的测试文档，内容极大可能会变动。）}
-
 \part{基本用法}
 
 \texttt{n} 为图纹编号的话，最简单的用法是 \latexinline{\pgfornamenthan[color=red,width=1.5cm]{n}}。
-也可以用 \texttt{height} 或者 \texttt{scale} 设定大小。注意图纹比例是不变的，因此只有最后给出的选项有效。此外 \texttt{symmetry} 参数可以实现3种镜像，\texttt{v} (垂直）、\texttt{h}（水平）、\texttt{c}（中心=垂直+水平镜像），画边框的四个角点时很好用。
-
-TikZ 选项的应用：
+也可以用 \texttt{height} 或者 \texttt{scale} 设定大小。注意图纹比例是不变的，因此只有最后给出的选项有效。此外 \texttt{symmetry} 参数可以实现3种镜像，\texttt{v} (垂直）、\texttt{h}（水平）、\texttt{c}（中心=垂直+水平镜像），画边框的四个角点时很好用。其它TikZ 参数的应用：
 
 \begin{latexcode}
 \tikzset{pgfornamentstyle/.append style={draw=black,fill=red,line width=1}}
@@ -127,9 +125,12 @@ TikZ 选项的应用：
 \bigskip
 
 \begin{tcblisting}{title={文本中的使用},listing side text,righthand width=5.5cm}
-先来一个 \pgfornamenthan[color=blue,scale=0.2]{56}
-寿字纹。原本的 \pgfornament[scale=0.3]{56} 依然可用。
+先来一个 \pgfornamenthan[color=blue,scale=0.18]{56}
+寿字纹。原本的 \pgfornament[scale=0.2]{56} 依然可用。
 \end{tcblisting}
+
+\enlargethispage{\baselineskip}
+
 
 \begin{tcblisting}{title={TikZ选项的应用},listing side text,righthand width=3cm}
 \begin{tikzpicture}[baseline={(current bounding box.center)}]
@@ -140,23 +141,27 @@ TikZ 选项的应用：
 \end{tikzpicture}
 \end{tcblisting}
 
-\enlargethispage{\baselineskip}
-
 \begin{tcblisting}{title={简单的边框范例}}
 
 \begin{tikzpicture}[x=1pt,y=1pt]
-    \tikzset{every node/.append style={inner sep=0pt,color=胭脂}}
-    % \tikzset{pgfornamentstyle/.append style={draw=Goldenrod,fill=Red,line width=1pt}}
-      \node (nw) {\pgfornamenthan[scale=0.35]{1}};
-    \node[anchor=north west,right=100 of nw] (ne) {\pgfornamenthan[symmetry=v,scale=0.35]{1}};
+    \tikzset{every node/.append style={inner sep=0pt,color=茜色}}
+    \node (nw) {\pgfornamenthan[scale=0.35]{1}};
+    \node[anchor=north west,right=140bp of nw] (ne) {\pgfornamenthan[symmetry=v,scale=0.35]{1}};
     \node[anchor=north west,below=0pt of nw] (sw) {\pgfornamenthan[symmetry=h,scale=0.35]{1}};
     \node[anchor=north east,below=0pt of ne] (se) {\pgfornamenthan[symmetry=c,scale=0.35]{1}};
 
     %% 用 pgfornmanet 自带的 \draw (A) to[ornamenthan=19] (B) 机制的话会导致线条高度跟着变化！只好折衷用tikz的 xscale 来实现加长了。\pgfornamenthan 本身的 scale 则要确保和角点的 scale 一致。
-    \node[anchor=north west,xscale=1.45] at (nw.north east) {\pgfornamenthan[scale=0.35]{29}};
-    \node[anchor=south west,xscale=1.45] at (sw.south east) {\pgfornamenthan[scale=0.35]{29}};
+    \node[anchor=south west,xscale=2] at (sw.south east) {\pgfornamenthan[scale=0.35]{29}};
 
-  \node[font=\kaishu,align=center,xshift=50,text=black] at (nw.south east)
+    %% 另外一种方法是用 decorations，同样需要注意一下各种长度参数
+    \begin{scope}[decoration={markings,
+      mark=between positions 0 and 0.75 step 70bp with
+        { \node[transform shape,anchor=north west]{\pgfornamenthan[scale=0.35]{29}};}
+      }]
+      \draw[decorate] (nw.north east) -- (ne.north west);
+    \end{scope}
+
+  \node[font=\kaishu,align=center,xshift=70,text=black] at (nw.south east)
      {给我一片海棠红啊海棠红\\血一样的海棠红\\
      沸血的烧痛是乡愁的烧痛\\给我一片海棠红啊海棠红};
 \end{tikzpicture}
@@ -175,7 +180,7 @@ TikZ 选项的应用：
   \node[anchor=south west,rotate=-90] at (nw.south west) {\pgfornamenthan[scale=0.25]{32}};
   \node[anchor=south east,rotate=90] at (ne.south east) {\pgfornamenthan[scale=0.25]{32}};
 
-  \node[anchor=center,靛蓝,shift={(25bp,-25bp)}] at (nw.south east) {\pgfornamenthan[scale=0.5]{57}};
+\node[anchor=center,靛蓝,shift={(25bp,-25bp)}] at (nw.south east) {\pgfornamenthan[scale=0.5]{57}};
 \end{tikzpicture}
 \end{tcblisting}
 
@@ -190,7 +195,8 @@ TikZ 选项的应用：
 \end{tcblisting}
 
 \begin{tcblisting}{listing only,title={框着整个页面的代码。很适合拿来设计奖状证书的有木有！}}
-
+  \newbox{\fortyseven}
+  \savebox{\fortyseven}{\pgfornamenthan[scale=0.2,color=鸭卵青]{47}}
   \tikzset{every node/.append style={inner sep=0pt,鸭卵青}}
   \begin{tikzpicture}[overlay,remember picture]
   \node[anchor=north west,shift={(14.5pt,-14.5pt)}] at (current page.north west)
@@ -203,39 +209,37 @@ TikZ 选项的应用：
     (se) {\pgfornamenthan[scale=0.2,symmetry=c]{25}};
   %
   \begin{scope}[start chain,node distance=0pt]
-  \node[anchor=north west,on chain] at (nw.north east) {\pgfornamenthan[scale=0.2]{47}};
+  \node[anchor=north west,on chain] at (nw.north east) {\usebox{\fortyseven}};
   \foreach \i in {1,...,15} {
-    \node[on chain]{\pgfornamenthan[scale=0.2]{47}};
+    \node[on chain]{\usebox{\fortyseven}};
   }
   \end{scope}
   %
   \begin{scope}[start chain,node distance=0pt]
-  \node[anchor=south west,on chain] at (sw.south east) {\pgfornamenthan[scale=0.2]{47}};
-  \foreach \i in {1,...,6} \node[on chain]{\pgfornamenthan[scale=0.2]{47}};
+  \node[anchor=south west,on chain] at (sw.south east) {\usebox{\fortyseven}};
+  \foreach \i in {1,...,6} \node[on chain]{\usebox{\fortyseven}};
   \end{scope}
   %
   \begin{scope}[start chain=going left,node distance=0pt]
-  \node[anchor=south east,on chain] at (se.south west) {\pgfornamenthan[scale=0.2]{47}};
-  \foreach \i in {1,...,6} \node[on chain]{\pgfornamenthan[scale=0.2]{47}};
+  \node[anchor=south east,on chain] at (se.south west) {\usebox{\fortyseven}};
+  \foreach \i in {1,...,6} \node[on chain]{\usebox{\fortyseven}};
   \end{scope}
   %
   % 垂直的话 chains 比较不好控制，我懒得折腾了，直接用 \foreach。
   % 自己算一下， (47) 长度 155. 那么 scale = 0.2 的话……
   \foreach \i in {0,...,21}
     \node[anchor=south west,rotate=-90,shift={($\i*(31bp,0)$)}] at (nw.south west)
-      {\pgfornamenthan[scale=0.2]{47}};
+      {\usebox{\fortyseven}};
   %
   \foreach \i in {0,...,21}
     \node[anchor=south east,rotate=90,shift={($\i*(-31bp,0)$)}] at (ne.south east)
-      {\pgfornamenthan[scale=0.2]{47}};
+      {\usebox{\fortyseven}};
   %
   %% 严格来说应该放在 \fancyfoot 吧，算了一样啦
-  \node[yshift=32pt,铜绿] at (current page.south) {\pgfornamenthan[scale=0.14]{51}};
+  \node[yshift=32pt,铜绿] at (current page.south) {\pgfornamenthan[scale=0.1]{51}};
   \node[yshift=32pt,text=black] at (current page.south) {\large\thepage};
   %
   \end{tikzpicture}
-  }
-
 \end{tcblisting}
 
 \part{纹样列表}
