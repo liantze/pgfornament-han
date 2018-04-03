@@ -97,17 +97,17 @@
 
 \usepackage[hidelinks]{hyperref}
 
-\title{汉风图纹 \texttt{pgfornament-han} v0.3}
+\title{汉风图纹 \texttt{pgfornament-han} v0.31}
 \author{林莲枝、张晨南}
-\date{v0.3 2018/04/01\\\url{https://github.com/liantze/pgfornament-han}}
+\date{v0.31 2018/04/03\\\url{https://github.com/liantze/pgfornament-han}}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-利用 \texttt{pgfornament} 宏包可以在 \LaTeX{} 文件里便捷地画出十分典雅漂亮的、欧式风格的花纹。（详情请自行访问 \url{http://ctan.org/pkg/pgfornament}。）
-\texttt{pgfornament-han} 宏包的用意，正是为了尝试用 \texttt{pgfornament} 的已有机制，提供一些汉风的传统图纹。所有图纹均由\emph{张晨南}以 CAD 程式定稿、TikZ 绘制，再由\emph{林莲枝}转为适合 \texttt{pgfornament} 机制使用的宏包代码。
+利用 \texttt{pgfornament} 宏包可以在 \LaTeX{} 文件里便捷地画出十分典雅漂亮的、欧式风格的花纹。（详情请自行访问 \url{http://ctan.org/pkg/pgfornament}）
+ \texttt{pgfornament-han} 宏包的用意，正是为了尝试用 \texttt{pgfornament} 的已有机制，提供一些汉风的传统图纹。所有图纹均由\emph{张晨南}以 CAD 程式定稿、TikZ 绘制，再由\emph{林莲枝}转为适合 \texttt{pgfornament} 机制使用的宏包代码。
 \end{abstract}
 
 \part{基本用法}
@@ -495,5 +495,179 @@
 \end{tikzpicture}
 \end{center}
 
+\clearpage
+\appendix
+\ctexset{section/name={附录}}
+
+\section{传统中国 cncolours.sty}
+
+\centering
+这是我比较早以前做的一个宏包了，色卡取自 \url{http://ylbook.com/cms/web/chuantongsecai/chuantongsecai.htm}。
+
+\bigskip
+
+\renewcommand{\baselinestretch}{2}
+\newcommand\showcolour[1]{%
+  \fcolorbox{乌黑}{#1}{\makebox[2em]{\phantom{M}}}~\makebox[5em][l]{#1}%
+}
+
+\showcolour{粉红}
+\showcolour{妃色}
+\showcolour{品红}
+\showcolour{桃红}
+\showcolour{海棠红}
+\showcolour{石榴红}
+\showcolour{樱桃色}
+\showcolour{银红}
+\showcolour{大红}
+\showcolour{绛紫}
+\showcolour{绯红}
+\showcolour{胭脂}
+\showcolour{朱红}
+\showcolour{丹}
+\showcolour{彤}
+\showcolour{茜色}
+\showcolour{火红}
+\showcolour{赫赤}
+\showcolour{嫣红}
+\showcolour{洋红}
+\showcolour{炎}
+\showcolour{赤}
+\showcolour{绾}
+\showcolour{枣红}
+\showcolour{檀}
+\showcolour{殷红}
+\showcolour{酡红}
+\showcolour{酡颜}
+\showcolour{鹅黄}
+\showcolour{鸭黄}
+\showcolour{樱草色}
+\showcolour{杏黄}
+\showcolour{杏红}
+\showcolour{橘黄}
+\showcolour{橙黄}
+\showcolour{橘红}
+\showcolour{姜黄}
+\showcolour{缃色}
+\showcolour{橙色}
+\showcolour{茶色}
+\showcolour{驼色}
+\showcolour{昏黄}
+\showcolour{栗色}
+\showcolour{棕色}
+\showcolour{棕绿}
+\showcolour{棕黑}
+\showcolour{棕红}
+\showcolour{棕黄}
+\showcolour{赭色}
+\showcolour{琥珀}
+\showcolour{褐色}
+\showcolour{枯黄}
+\showcolour{黄栌}
+\showcolour{秋色}
+\showcolour{秋香色}
+\showcolour{嫩绿}
+\showcolour{柳黄}
+\showcolour{柳绿}
+\showcolour{竹青}
+\showcolour{葱黄}
+\showcolour{葱绿}
+\showcolour{葱青}
+\showcolour{青葱}
+\showcolour{油绿}
+\showcolour{绿沉}
+\showcolour{碧色}
+\showcolour{碧绿}
+\showcolour{青碧}
+\showcolour{翡翠色}
+\showcolour{草绿}
+\showcolour{青色}
+\showcolour{青翠}
+\showcolour{青白}
+\showcolour{鸭卵青}
+\showcolour{蟹壳青}
+\showcolour{鸦青}
+\showcolour{绿色}
+\showcolour{豆绿}
+\showcolour{豆青}
+\showcolour{石青}
+\showcolour{玉色}
+\showcolour{缥}
+\showcolour{艾绿}
+\showcolour{松柏绿}
+\showcolour{松花绿}
+\showcolour{松花色}
+\showcolour{蓝}
+\showcolour{靛青}
+\showcolour{靛蓝}
+\showcolour{碧蓝}
+\showcolour{蔚蓝}
+\showcolour{宝蓝}
+\showcolour{蓝灰色}
+\showcolour{藏青}
+\showcolour{藏蓝}
+\showcolour{黛}
+\showcolour{黛绿}
+\showcolour{黛蓝}
+\showcolour{黛紫}
+\showcolour{紫色}
+\showcolour{紫酱}
+\showcolour{酱紫}
+\showcolour{紫檀}
+\showcolour{绀青}
+\showcolour{紫棠}
+\showcolour{青莲}
+\showcolour{群青}
+\showcolour{雪青}
+\showcolour{丁香色}
+\showcolour{藕色}
+\showcolour{藕荷色}
+\showcolour{苍色}
+\showcolour{苍黄}
+\showcolour{苍青}
+\showcolour{苍黑}
+\showcolour{苍白}
+\showcolour{水色}
+\showcolour{水红}
+\showcolour{水绿}
+\showcolour{水蓝}
+\showcolour{淡青}
+\showcolour{湖蓝}
+\showcolour{湖绿}
+\showcolour{精白}
+\showcolour{象牙白}
+\showcolour{雪白}
+\showcolour{月白}
+\showcolour{缟}
+\showcolour{素}
+\showcolour{荼白}
+\showcolour{霜色}
+\showcolour{花白}
+\showcolour{鱼肚白}
+\showcolour{莹白}
+\showcolour{灰色}
+\showcolour{牙色}
+\showcolour{铅白}
+\showcolour{玄色}
+\showcolour{玄青}
+\showcolour{乌色}
+\showcolour{乌黑}
+\showcolour{漆黑}
+\showcolour{墨色}
+\showcolour{墨灰}
+\showcolour{黑色}
+\showcolour{缁色}
+\showcolour{煤黑}
+\showcolour{黧}
+\showcolour{黎}
+\showcolour{黝}
+\showcolour{黝黑}
+\showcolour{黯}
+\showcolour{赤金}
+\showcolour{金色}
+\showcolour{银白}
+\showcolour{铜绿}
+\showcolour{乌金}
+\showcolour{老银}
 
 \end{document}
