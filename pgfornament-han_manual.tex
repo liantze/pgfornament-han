@@ -1,6 +1,9 @@
 % !TEX option = --shell-escape
 % !TEX program = xelatex
-\documentclass[fontset=fandol]{ctexart}
+\documentclass{ctexart}
+
+\setmainfont{Linux Libertine O}
+\setsansfont{Linux Biolinum O}
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage{pgfornament-han}
@@ -15,6 +18,7 @@
 \geometry{hmargin=1in,vmargin=0.8in,headheight=10pt}
 
 \usepackage{tcolorbox}
+\tcbuselibrary{skins,raster}
 
 
 %%%%%% 这段代码可以忽视，只是 --shell-escape 时调用 minted 不然就用 listings
@@ -97,9 +101,9 @@
 
 \usepackage[hidelinks]{hyperref}
 
-\title{汉风图纹 \texttt{pgfornament-han} v0.31}
+\title{汉风图纹 \texttt{pgfornament-han} v0.32}
 \author{林莲枝、张晨南}
-\date{v0.31 2018/04/03\\\url{https://github.com/liantze/pgfornament-han}}
+\date{v0.32 2018/04/09\\\url{https://github.com/liantze/pgfornament-han}}
 
 \begin{document}
 
@@ -120,7 +124,7 @@
 \pgfornamenthan[scale=2]{n}
 \end{latexcode}
 
-以下是一些范例。
+以下是一些范例。也记得翻到文档最后的附录，有惊喜。
 
 \bigskip
 
@@ -498,9 +502,11 @@
 \clearpage
 \appendix
 \ctexset{section/name={附录}}
+\phantomsection\addcontentsline{toc}{part}{附录}
 
-\section{传统中国 cncolours.sty}
+\section{传统中国颜色 \texttt{cncolours.sty}}
 
+\begingroup
 \centering
 这是我比较早以前做的一个宏包了，色卡取自 \url{http://ylbook.com/cms/web/chuantongsecai/chuantongsecai.htm}。
 
@@ -669,5 +675,43 @@
 \showcolour{铜绿}
 \showcolour{乌金}
 \showcolour{老银}
+
+\endgroup
+
+\clearpage
+
+\section{萧山 Beamer 主题 Xiaoshan Beamer Theme \texttt{beamerthemeXiaoshan.sty}}
+
+这个Beamer主题是以 \href{https://ctan.org/pkg/beamertheme-metropolis}{Metropolis} 为基础，用 \texttt{cncolours.sty} 调了一下颜色，加入少许汉风纹样。
+
+\bigskip
+
+\begin{tcblisting}{listing side comment,title={使用范例},pdf comment={XiaoShanSample.pdf}}
+\documentclass{ctexbeamer}
+
+\usetheme{Xiaoshan}
+
+\author{林莲枝}
+\title{萧山Beamer主题}
+\subtitle{\texttt{pgfornament-han}附录福利}
+
+\begin{document}
+
+\begin{frame}
+  \maketitle
+\end{frame}
+
+\section{简介}
+
+\begin{frame}
+  \frametitle{其实是 Metropolis 主题的魔改}
+  \begin{itemize}
+    \item 改了颜色（用了 \texttt{cncolours.sty}）
+    \item 加入 \texttt{pgfornament-han} 汉风纹样元素
+  \end{itemize}
+\end{frame}
+......
+\end{document}
+\end{tcblisting}
 
 \end{document}
