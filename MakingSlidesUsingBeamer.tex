@@ -1,0 +1,267 @@
+%\documentclass[10pt,letterpaper]{beamer}
+\documentclass[space,punct=kaiming]{ctexbeamer}
+\usetheme{Xiaoshan}
+
+%===================Theme
+%\usetheme{Warsaw}
+%\usetheme{Boadilla}
+%\usetheme{Rochester}
+\setbeamercovered{transparent} % Makes covered items partly visible
+%===================
+\usepackage{ragged2e}
+\justifying
+\let\raggedright\justifying % 修改默认左对齐为分散对齐
+\usepackage{minted}
+\newcommand{\mtl}[1]{\mintinline{tex}|#1|}
+\newcommand{\mt}[1]{\mint{tex}|#1|}
+\usepackage{indentfirst}
+\xeCJKsetup{CJKecglue = {\hskip 0.08em plus 0.02em minus 0.01em},
+	xCJKecglue = {\hskip 0.08em plus 0.02em minus 0.01em}}
+% ----- Font Set -----
+\setCJKmainfont[AutoFakeSlant, BoldFont = FZHTK.TTF]{FZZDXK.TTF}
+\setCJKmonofont[AutoFakeSlant, AutoFakeBold]{FZFSK.TTF}
+%===================Title Elements
+\title[Beamer简介]{使用Beamer制作幻灯片}
+\subtitle{取材于Lambert E. Murray的介绍}
+\author{\href{mailto:yjccjlu@gmail.com}{圡の人}}
+\date[2018]{戊戌年\\ 丙辰月\\ 甲戌日}%{\today}
+\institute[量大]{之江畔\\ {\small 完颜侃数}}
+
+%===========Begin Document
+\begin{document}
+%===========Title Slide
+\frame{\maketitle}
+% Or you can use:
+% \begin{frame}
+% \titlepage
+% \end{frame}
+%===========Begin Frames
+
+\begin{frame}[containsverbatim]{文档结构}
+\begin{columns}
+\column{.34\textwidth}
+使用 \LaTeX{} 制作幻灯片, 推荐使用 \emph{Beamer}.
+
+通常, 你的文档需要有个标题, 作者, 每一章幻灯片应该有个 \emph{frame} 环境.
+
+因此, 你的的第一个幻灯片大概看起来是这个样子.
+
+\column{.66\textwidth}
+\begin{block}{这是一个例子}
+\begin{minted}{tex}
+\documentclass[options]{beamer}
+\usetheme{Boadilla}
+\setbeamercovered{transparent}
+\title{Long Title}
+\subtitle{Short Title}
+\author{Your Name}
+\institute[HU]{Harding University}
+\begin{document}
+\begin{frame}
+. . . 
+\end{frame}
+\end{document}
+\end{minted}
+\end{block}
+\end{columns}
+\end{frame}
+ 
+\begin{frame}[fragile]{第一张幻灯片}
+  这是第一张幻灯片的, 使用了默认的位置选项.
+  \mt{\begin{frame}[option]}
+  option: [t] - top; [b] - bottom; [c] - center (默认选项) \pause
+ \begin{block}{块标题}
+   幻灯片里的文本可以放在附带标题的块环境中.
+   \mt{\begin{block}{块标题}}
+ \end{block}\pause
+ \begin{block}{}
+   如果不想要块标题, 可以置空.
+   \mt{\begin{block}{}}
+  \end{block}
+\end{frame}
+
+\begin{frame}[t]{第二张幻灯片}
+  这是第二张幻灯片.
+\begin{block}{}
+  这里使用了[t]选项使文本位于幻灯片顶部.
+  \mt{\begin{frame}[t]{第二张幻灯片}}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{第三张幻灯片}
+  在幻灯片里可以使用典型的 \LaTeX{} 指令输入公式, 例如
+  \begin{equation}
+    \vec{F} = m \vec{a}.
+  \end{equation}\pause
+  
+  还可以使用列表.
+
+  \begin{itemize}
+    \item 首先
+    \item 其次
+    \item 然后
+  \end{itemize}\pause
+  也可以使用有序列表.
+  \begin{enumerate}
+    \item 首先
+    \item 其次
+    \item 然后
+  \end{enumerate}
+\end{frame}
+
+%============Columns
+\begin{frame}[t,fragile]{多栏}
+  可以将文本或公式放在不同的栏.
+  
+  这里我们设置两栏, 每一栏设为幻灯片文本宽度的一半.\pause
+  
+  \begin{columns}[t]
+   \column{.45\textwidth}
+    \begin{center}
+      第一栏
+    \end{center}\pause 
+    内容可以是简单的文本, 
+    
+    也可以使用块环境.\pause 
+    
+   \column{.45\textwidth}
+    \begin{center}
+      第二栏
+    \end{center}
+    \begin{block}{公式}
+      \[
+        \vec{F}=m\vec{a}
+      \]
+    \end{block}\pause
+    \begin{block}{文本}
+      这是一句话.
+    \end{block}
+%    \begin{block}{}
+%       一个简单的没标题的块.
+%    \end{block}
+  \end{columns}
+
+\end{frame}
+%==============Overlays
+\begin{frame}[fragile]{覆盖和分项列表}
+  常见的分项列表信息, 诸如
+\begin{itemize}
+\item 第一条
+\item 第二条
+\item 第三条
+\end{itemize}\pause
+
+可以使用\emph{overlays}每次展示一项来强化效果。 \pause
+
+这实际上是由编译器创建独立的重复帧，
+
+根据覆盖规范添加额外的项。
+\end{frame}
+%==============Overlays
+\begin{frame}[fragile]{覆盖和分项列表}
+\begin{columns}
+\column{.45\textwidth}
+\begin{block}{代码}
+\begin{minted}{tex} 
+\begin{itemize}
+  \item<1-> 第一条
+  \item<2-> 第二条
+  \item<3-> 第三条
+\end{itemize}
+\end{minted}
+\end{block}
+\column{.45\textwidth}
+\begin{block}{效果}
+\	
+\begin{itemize}
+  \item<1-> 第一条
+  \item<2-> 第二条
+  \item<3-> 第三条
+\end{itemize}
+\
+\end{block}
+\end{columns}
+\end{frame}
+%============Variations on the Overlays
+\begin{frame}[t,fragile]{列表项显示次序设定}
+  可以通过使用叠加命令来改变显示顺序及特殊格式。
+\begin{columns}
+\column{.65\textwidth}
+\begin{block}{代码}
+\begin{minted}{tex} 
+\begin{itemize}
+  \item<3> 第一条
+  \item<2-> \textbf<3>{第二条}
+  \item<1> 第三条
+\end{itemize}
+\end{minted}
+\end{block}
+\column{.35\textwidth}
+\begin{block}{效果}
+ \	
+\begin{itemize}
+  \item<3> 第一条
+  \item<2-> \textbf<3>{第二条}
+  \item<1> 第三条
+\end{itemize}
+ \
+\end{block}
+\end{columns}
+\end{frame}
+%=================Using Uncover 
+\begin{frame}[fragile]{关联指令uncover示例}
+  列表标签有如下选择: [a], [A], [i], [I], [1]  \pause
+\begin{columns}
+\column{.65\textwidth}
+\begin{block}{代码}
+\begin{minted}{tex} 
+\begin{enumerate}[1]
+  \item<2-5>苹果
+  \item<3-5>
+  \color<5>[rgb]{0,0.6,0}猕猴桃
+  \item<4-5>柠檬
+\end{enumerate}
+\uncover<1-5>{提示:}\\
+\uncover<2-5>{苹果是圆的}\\
+\uncover<3-5>{猕猴桃是毛绒绒的}\\
+\uncover<4-5>{柠檬是酸的} 
+\end{minted}
+\end{block}
+\column{.35\textwidth}
+\begin{block}{效果}
+\	
+\begin{enumerate}[1]
+	\item<2-5>苹果
+	\item<3-5>
+	\color<5>[rgb]{0,0.6,0}猕猴桃
+	\item<4-5>柠檬
+\end{enumerate}
+\uncover<1-5>{提示:}\\
+\uncover<2-5>{苹果是圆的}\\
+\uncover<3-5>{猕猴桃是毛绒绒的}\\
+\uncover<4-5>{柠檬是酸的} 
+\
+\end{block}
+\end{columns}
+\end{frame}
+%==================Text Samples
+\begin{frame}[fragile]{文本示例}
+
+\begin{block}{\LaTeX{}指令\mtl{\uncover} \uncover<2>{及其效果}}
+\begin{tabular}{l|c}
+\hline
+\multicolumn{1}{c}{\textbf{指令}}		&   \textbf{效果}\\ 
+\hline
+\verb|\textbf<2>{示例Sample}|		&	\textbf<2>{示例Sample}\\
+\verb|\textit<2>{示例Sample}|		&	\textit<2>{示例Sample}\\
+\verb|\textsl<2>{示例Sample}|		&	\textsl<2>{示例Sample}\\
+\verb|\alert<2>{示例Sample}|		&	\alert<2>{示例Sample}\\
+\verb|\textrm<2>{示例Sample}|		&	\textrm<2>{示例Sample}\\
+\verb|\color<2>{green} 示例Sample|	&	\color<2>{green} 示例Sample\\
+\end{tabular}
+\end{block}
+
+
+
+\end{frame}
+\end{document}
