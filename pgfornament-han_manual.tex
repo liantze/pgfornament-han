@@ -5,6 +5,7 @@
 \setmainfont{Linux Libertine O}
 \setsansfont{Linux Biolinum O}
 
+\usepackage{ragged2e}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{pgfornament-han}
 \usetikzlibrary{chains}
@@ -99,7 +100,7 @@
 \pagestyle{fancy}
 \fancypagestyle{plain}{\pagestyle{fancy}}
 
-\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks]{hyperref}
 
 \title{汉风图纹 \texttt{pgfornament-han} v0.32}
 \author{林莲枝、张晨南}
@@ -501,13 +502,15 @@
 
 \clearpage
 \appendix
+\setlength{\parindent}{2\ccwd}\justifying
 \ctexset{section/name={附录}}
 \phantomsection\addcontentsline{toc}{part}{附录}
 
 \section{传统中国颜色 \texttt{cncolours.sty}}
 
 \begingroup
-% \centering
+
+
 这是我比较早以前做的一个宏包了，色卡取自 \url{http://ylbook.com/cms/web/chuantongsecai/chuantongsecai.htm}。
 
 感谢网友\href{https://github.com/heangfat}{\emph{端憲}}，加入了三正色，以及提供繁体中文的颜色名称。
@@ -519,6 +522,7 @@
   \fcolorbox{乌黑}{#1}{\makebox[2em]{\phantom{M}}}~\makebox[5em][l]{#1}%
 }
 
+\begin{RaggedRight}
 \showcolour{粉红}
 \showcolour{妃色}
 \showcolour{品红}
@@ -680,14 +684,16 @@
 \showcolour{正青}
 \showcolour{正赤}
 \showcolour{正黄}
+\end{RaggedRight}
 
 \clearpage
 
 \CJKfontspec{Noto Serif CJK TC}
-以下是繁體中文字體名稱。姜黃、薑黃是兩種植物。未審此指何種，闕之。
+以下是繁體中文字體名稱，由網友\href{https://github.com/heangfat}{\emph{端憲}}提供。姜黃、薑黃是兩種植物。未審此指何種，闕之。
 
 \bigskip
 
+\begin{RaggedRight}
 \showcolour{粉紅}
 \showcolour{妃色}
 \showcolour{品紅}
@@ -849,6 +855,7 @@
 \showcolour{正青}
 \showcolour{正赤}
 \showcolour{正黃}
+\end{RaggedRight}
 
 \endgroup
 
@@ -860,7 +867,7 @@
 
 \bigskip
 
-\begin{tcblisting}{listing side comment,title={使用范例},pdf comment={XiaoShanSample.pdf}}
+\begin{tcblisting}{listing side comment,title={使用范例},pdf comment={xiaoshan-sample.pdf}}
 \documentclass{ctexbeamer}
 
 \usetheme{Xiaoshan}
@@ -887,5 +894,70 @@
 ......
 \end{document}
 \end{tcblisting}
+
+
+\clearpage
+
+\section{神马浮云 Beamer 主题 Heavenly Clouds Beamer Theme \texttt{beamerthemeHeavenlyClouds.sty}}
+
+这个Beamer主题是我一次病中摸鱼摸出来的，脑洞略大。每一页的背景的云彩纹样，位置、大小、深浅都是随机的，所以如果内容页数比较多，编译时运算可能会比较花时间，请自行斟酌使用此主题。
+
+\bigskip
+
+\begin{tcblisting}{listing side comment,title={使用范例},pdf comment={heavenlyclouds-sample.pdf}}
+\documentclass{ctexbeamer}
+\usetheme{HeavenlyClouds}
+
+\author{林莲枝}
+\title{神马浮云\\Beamer主题}
+\subtitle{\texttt{pgfornament-han}附录福利}
+
+\begin{document}
+
+\begin{frame}[noframenumbering]
+  \maketitle
+\end{frame}
+
+\section{简介一}
+
+\begin{frame}[fragile,allowframebreaks]
+  \frametitle{此主题脑洞略大}
+  ...
+\end{frame}
+...
+\end{document}
+\end{tcblisting}
+
+一些注意事项：
+\begin{itemize}
+  \item Mac 或 Linux 系统上，\texttt{ctex}是不提供隶书\mintinline{latex}{\lishu}的，请自己设定。例：
+
+  \mintinline{latex}{\providecommand{\lishu}{\CJKfontspec{Libian SC}[BoldFont=Baoli SC,Scale=1.2]}}
+
+  \item 标题页的寿字纹，可以用各自高校的标志代替。中国高校校徽很多都是圆形的。确保一下背景是透明色的 png 或 pdf 档就可以了。
+
+  \mintinline{latex}{\titlegraphic{\includegraphics[width=2cm]{logo}}}
+
+
+  \item 也可以在导言区加一句 \mintinline{latex}{\alttitlecircle}，会得到另一种标题页的装饰纹样。效果如下：
+
+  \begin{tikzpicture}%[transform shape,scale=0.5]
+    \newbox{\circleelem}%
+    \savebox{\circleelem}{%
+      \tikzset{pgfornamentstyle/.style={transform shape}}%
+      \pgfornamenthan[width=0.5236cm,
+         color=殷红!80!black,
+         symmetry=h]{74}%
+    }
+    \begin{scope}[decoration={markings, mark=between positions 0 and 1 step 0.5236cm
+    with { \node[transform shape,inner sep=0pt,outer sep=0pt]{\usebox{\circleelem}}; }} ]
+    \path [postaction={decorate}] circle (1cm);
+    \end{scope}%
+    \node {\pgfornamenthan[width=1.25cm,color=殷红]{56}};
+  \end{tikzpicture} \emph{效果有可能有点狂，请视场合斟酌使用。}
+
+
+\end{itemize}
+
 
 \end{document}

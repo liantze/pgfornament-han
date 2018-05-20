@@ -1,0 +1,85 @@
+% !TEX program=xelatex
+% \documentclass[aspectratio=169]{ctexbeamer}
+\documentclass{ctexbeamer}
+
+\usetheme{HeavenlyClouds}
+
+% Mac 或 Linux 上请自己设定 \lishu!!
+% \providecommand{\lishu}{\CJKfontspec{Libian SC}[BoldFont=Baoli SC,Scale=1.2]}
+
+\author{林莲枝}
+\title{神马浮云\\Beamer主题}
+\subtitle{\texttt{pgfornament-han}附录福利}
+
+% 可以放各自高校的校徽，中国高校校徽好像大多数都是圆形的。确保一下背景是透明色的 png 或 pdf 档就可以了
+% \titlegraphic{\includegraphics[width=2cm]{example-grid-100x100pt}}
+
+% \alttitlecircle  %% 试试取消注释，有惊喜
+
+\begin{document}
+
+\begin{frame}[noframenumbering]
+  \maketitle
+\end{frame}
+
+\section{简介}
+
+\begin{frame}[fragile,allowframebreaks]
+  \frametitle{此主题脑洞略大}
+
+  \begin{itemize}
+    \item 每一页的背景的云彩纹样，位置、大小、深浅都是随机的
+    \item 所以如果内容很多页的话，编译时运算可能会比较花时间
+    \item 导言区加上 \verb|\alttitlecircle|，标题页的纹样会变化
+
+    \framebreak
+    \item 标题页的寿字纹，可以用各自高校的标志代替。中国高校校徽很多都是圆形的。确保一下背景是透明色的 png 或 pdf 档就可以了
+
+    \verb|\titlegraphic{\includegraphics[width=2cm]{logo}}|
+
+    \medskip
+
+    \item 浮云有了，神马呢？
+      \begin{itemize}
+        \item 以后如果做出来了马的简易图腾纹样，才考虑取代掉进度条的圆点吧
+      \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{套马的汉子你威武雄壮}
+
+  \begin{itemize}
+    \item 飞驰的骏马像疾风一样
+    \item 一望无际的原野随你去流浪
+    \item 你的心海和大地一样宽广
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+  \frametitle{各种 block}
+
+  \begin{block}{你是我天边最美的云彩}
+    让我用心把你留下来
+  \end{block}
+
+  \begin{exampleblock}{你是我天边最美的云彩}
+    让我用心把你留下来
+  \end{exampleblock}
+
+  \begin{alertblock}{你是我天边最美的云彩}
+    让我用心把你留下来
+  \end{alertblock}
+
+  \begin{theorem}[你是我天边最美的云彩]
+    让我用心把你留下来
+  \end{theorem}
+
+  \begin{proof}[你是我天边最美的云彩]
+    让我用心把你留下来
+  \end{proof}
+\end{frame}
+
+\end{document}
