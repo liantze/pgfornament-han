@@ -1,4 +1,4 @@
-# pgfornament-han v0.32 2018/04/09
+# pgfornament-han 2018/05/15
 A pgfornament library for Chinese traditional motifs and patterns.
 
 以 pgfornament 宏包的机制，实现绘制汉风图纹。
