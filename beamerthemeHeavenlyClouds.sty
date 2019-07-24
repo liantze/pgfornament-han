@@ -1,4 +1,4 @@
-% beamerthemeHeavenlyClouds.sty v1.0 2018/05/15
+% beamerthemeHeavenlyClouds.sty v1.1 2019/07/24
 % by LianTze Lim (liantze@gmail.com)
 \ProvidesPackage{beamerthemeHeavenlyClouds}
 
@@ -133,6 +133,7 @@
 
 \AtBeginSection{\begin{frame}\sectionpage\end{frame}}
 \renewcommand{\thesection}{\chinese{section}}
+\newlength{\cloud@secname@height}
 \setbeamertemplate{section page}{
 \usebeamercolor{section title}\usebeamercolor{section name}
 \newbox{\clouds@section@circle@elem}
@@ -140,7 +141,6 @@
   \usebeamercolor{headline}%
   \pgfornamenthan[width=1.0471cm,color=headline.fg!80!black]{59}%
 }
-\newlength{\cloud@secname@height}
 \settototalheight{\cloud@secname@height}{\usebeamerfont{section name}节}
 \begin{tikzpicture}
   \begin{scope}[decoration={markings, mark=between positions 0 and 1 step 1.0471cm
