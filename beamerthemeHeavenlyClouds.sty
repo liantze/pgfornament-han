@@ -87,7 +87,26 @@
 
 \newlength{\clouds@frametitle@rawwidth}%
 \newlength{\clouds@frametitle@actualwidth}%
+\def\clouds@progressmarker{}
+\newcommand{\simpleprogressmarker}{%
+  \renewcommand{\clouds@progressmarker}{%
+  \clip (-1.25em,2em) rectangle (\paperwidth,0pt);
+  \fill[headline.fg] (\clouds@progressinheadfoot,1.25em) circle (2pt);
+  }%
+}
+\newbox{\clouds@shenma}
+\savebox{\clouds@shenma}{\usebeamercolor[fg]{headline}\pgfornamenthan[width=2.5em]{78}}
+\newcommand{\shenmaprogressmarker}{%
+  \renewcommand{\clouds@progressmarker}{%
+  \clip (-1.3em,4em) rectangle (\paperwidth,0pt);
+  \node[anchor=south,inner sep=1pt] at (\clouds@progressinheadfoot,1.25em)
+  {\usebox{\clouds@shenma}};
+  }
+}%
+
+
 \AtBeginDocument{%
+  \shenmaprogressmarker
   \newbox{\clouds@title@deco}
   \savebox{\clouds@title@deco}{%
     \usebeamercolor{headline}%
@@ -125,8 +144,8 @@
     with { \node[transform shape]{\usebox{\clouds@smallhuiwen}}; }} ]
   \path [postaction={decorate}] (0,0) -- (\paperwidth,0);
   \draw[headline.fg!50,line width=0.6pt] (-1.25em,1.25em) -- (\paperwidth,1.25em);
-  \clip (-1.25em,2em) rectangle (\paperwidth,0pt);
-  \fill[headline.fg] (\clouds@progressinheadfoot,1.25em) circle (2pt);
+  \clouds@progressmarker
+  % \fill[headline.fg] (\clouds@progressinheadfoot,1.25em) circle (2pt); %<-- TODO
   \end{tikzpicture}
   }
 }

@@ -6,7 +6,7 @@
 \setsansfont{Linux Biolinum O}
 
 \usepackage{ragged2e}
-\usepackage[dvipsnames]{xcolor}
+\usepackage[svgnames]{xcolor}
 \usepackage{pgfornament-han}
 \usetikzlibrary{chains}
 \usetikzlibrary{calc}
@@ -104,7 +104,7 @@
 
 \title{汉风图纹 \texttt{pgfornament-han}}
 \author{林莲枝、张晨南}
-\date{2018/05/15\\\url{https://github.com/liantze/pgfornament-han}}
+\date{2019/08/10\\\url{https://github.com/liantze/pgfornament-han}}
 
 \begin{document}
 
@@ -479,6 +479,18 @@
   \begin{tikzpicture}
     \fill[牙色](-1cm,-1cm) rectangle (1cm,1cm);
     \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,width=1cm]{\n}};
+    \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.8cm) {\n};
+    \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
+    \draw[color=牙色] (1cm,-1cm) rectangle (2.8cm,1cm);
+  \end{tikzpicture}\space\space
+}
+
+\section{动物}
+
+\foreach \n in {78,...,78}{%
+  \begin{tikzpicture}
+    \fill[牙色](-1cm,-1cm) rectangle (1cm,1cm);
+    \node[inner sep=0pt] (element) {\pgfornamenthan[color=茜色,width=1.8cm]{\n}};
     \node[inner sep=0pt,font=\footnotesize\bfseries\sffamily,color=紫檀] at (0.8cm,-0.8cm) {\n};
     \node[anchor=west,text width=4em,font=\footnotesize] at (1.1cm,0) {\getpgfornamenthanDim{\n}};
     \draw[color=牙色] (1cm,-1cm) rectangle (2.8cm,1cm);
@@ -934,6 +946,8 @@
 
   \mintinline{latex}{\providecommand{\lishu}{\CJKfontspec{Libian SC}[BoldFont=Baoli SC,Scale=1.2]}}
 
+  \item 可以用 \mintinline{latex}{\simpleprogressmarker} 以简单圆点代替进度条上的神马。
+
   \item 标题页的寿字纹，可以用各自高校的标志代替。中国高校校徽很多都是圆形的。确保一下背景是透明色的 png 或 pdf 档就可以了。
 
   \mintinline{latex}{\titlegraphic{\includegraphics[width=2cm]{logo}}}
@@ -955,7 +969,6 @@
     \end{scope}%
     \node {\pgfornamenthan[width=1.25cm,color=殷红]{56}};
   \end{tikzpicture} \emph{效果有可能有点狂，请视场合斟酌使用。}
-
 
 \end{itemize}
 
