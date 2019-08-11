@@ -95,7 +95,11 @@
   }%
 }
 \newbox{\clouds@shenma}
-\savebox{\clouds@shenma}{\usebeamercolor[fg]{headline}\pgfornamenthan[width=2.5em]{78}}
+\savebox{\clouds@shenma}{%
+  \usebeamercolor[fg]{headline}%
+  \tikzset{pgfornamentstyle/.style={line width=0pt}}%
+  \pgfornamenthan[width=2.5em]{78}%
+}
 \newcommand{\shenmaprogressmarker}{%
   \renewcommand{\clouds@progressmarker}{%
   \clip (-1.3em,4em) rectangle (\paperwidth,0pt);
