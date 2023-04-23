@@ -1,4 +1,4 @@
-% pgfornamenthan.sty v0.33 2019/08/10
+% pgfornament-han.sty v0.33 2019/08/10
 % Authors: pgf and LaTeX code by LIM LianTze
 %          based on CAD drawing by ZHANG Chennan
 
@@ -16,16 +16,15 @@
 \input{\pgfOrnamentsHanObject}%
 
 \let\pgf@@ornamenthan\pgf@@ornament
-% \patchcmd{\pgf@@ornamenthan}{\OrnamentsFamily}{han}{}{}
 \pretocmd{\pgf@@ornamenthan}{%
-  \def\OrnamentsFamily{han}
+  \def\OrnamentsFamily{han}%
 }{}{}
 
 \patchcmd{\pgf@@ornamenthan}
   {\OrnamentsFamily#1.pgf}
   {\OrnamentsFamily/\OrnamentsFamily#1.pgf}{}{}
 
-\tikzset{
+\tikzset{%
   ornamenthan/.style={%
     to path={%
       \pgfextra{%

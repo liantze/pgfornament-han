@@ -1,0 +1,195 @@
+% beamerthemeXiaoshan.sty v1.0 2023/04/23
+% by LianTze Lim (liantze@gmail.com)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeTianQing}
+\RequirePackage{cncolours}
+\RequirePackage{pgfornament-han}
+\RequirePackage{xpatch}
+\RequirePackage{calc}
+\RequirePackage{relsize}
+\RequirePackage{unicode-math}
+\setmathfont{latinmodern-math.otf}
+\setmathfont{Erewhon-Math.otf}
+\setmainfont{erewhon}
+\RequirePackage{tcolorbox}\tcbuselibrary{skins}
+\RequirePackage[absolute,overlay]{textpos}
+
+
+\usefonttheme[stillsansserifsmall]{serif}
+\renewcommand{\CJKrmdefault}{zhfs}
+\newfontfamily{\romankai}{Alegreya-Medium.otf}
+
+
+\definecolor{天青色}{HTML}{8DD4E8}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle continuation}[from second]
+\setbeamercolor{structure}{fg=正青}
+\setbeamercolor{palette secondary}{fg=天青色}
+\setbeamercolor{normal text}{bg=精白}
+
+\setbeamerfont{frametitle}{family=\romankai\kaishu,size=\LARGE}
+\setbeamerfont{title}{family=\kaishu,size=\Huge}
+\setbeamerfont{section name}{family=\kaishu,size=\Large}
+\setbeamerfont{section title}{family=\kaishu,size=\huge}
+\setbeamerfont{section in toc}{family=\kaishu,size=\large}
+
+\setbeamercolor{alerted text}{fg=樱桃色}
+\setbeamercolor{example text}{fg=绿沉}
+\setbeamercolor{block title}{fg=宝蓝}
+\setbeamercolor{mini frame}{bg=天青色}
+
+\newsavebox{\bulletboxone}
+\savebox{\bulletboxone}{\usebeamercolor[fg]{structure}\tikz\node[line width=0pt,inner sep=0pt,outer sep=0pt]{\pgfornamenthan[height=1ex]{43}};}
+
+\newsavebox{\bulletboxtwo}
+\savebox{\bulletboxtwo}{\usebeamercolor[fg]{structure}\tikz\node[line width=0pt,inner sep=0pt,outer sep=0pt]{\pgfornamenthan[height=1ex]{41}};}
+
+\newsavebox{\bulletboxthree}
+\savebox{\bulletboxthree}{\usebeamercolor[fg]{structure}\tikz\node[line width=0pt,inner sep=0pt,outer sep=0pt]{\pgfornamenthan[height=1ex]{33}};}
+
+\newsavebox{\topcornermotif}
+\savebox{\topcornermotif}{\tikzset{pgfornamentstyle/.style={rotate=30,draw=墨灰,color=蓝灰色,opacity=.2,inner sep=0pt,ultra thick}}\pgfornamenthan[width=.5\paperheight]{64}}
+
+\newsavebox{\bottomcornermotif}
+\savebox{\bottomcornermotif}{\tikzset{pgfornamentstyle/.style={draw=墨灰,color=正青,opacity=.9,inner sep=0pt,very thick}}\pgfornamenthan[width=.2\paperheight,symmetry=v]{74}}
+
+\setbeamertemplate{itemize item}{\raisebox{.08\ccwd}{\usebox{\bulletboxone}}}
+\setbeamertemplate{itemize subitem}{\raisebox{.08\ccwd}{\usebox{\bulletboxtwo}}}
+\setbeamertemplate{itemize subsubitem}{\raisebox{.08\ccwd}{\usebox{\bulletboxthree}}}
+
+\setbeamertemplate{enumerate item}{\kaishu\relsize{-1}\chinese{enumi}、}
+\setbeamertemplate{enumerate subitem}{\kaishu\relsize{-1}\chinese{enumii}、}
+\setbeamertemplate{enumerate subsubitem}{\kaishu\relsize{-1}\chinese{enumiii}、}
+\xpretocmd{\enumerate}{%
+  \setlength{\labelsep}{0pt}%
+  \setlength{\leftmarginii}{1.8\ccwd}%
+  \setlength{\leftmarginiii}{1.8\ccwd}%
+}{}{}
+
+\xpretocmd{\itemize}{%
+  \setlength{\labelsep}{.5\ccwd}%
+  \setlength{\leftmargini}{2\ccwd}%
+  \setlength{\leftmarginii}{\labelsep+1.1\wd\bulletboxtwo}%
+  \setlength{\leftmarginiii}{\labelsep+1.25\wd\bulletboxthree}%
+}{}{}
+
+
+\setbeamertemplate{background}{%
+  \vadjust{\begin{textblock*}{\wd\topcornermotif}(-.2\paperheight,-.08\paperheight)
+  \usebox{\topcornermotif}
+  \end{textblock*}
+  \begin{textblock*}{\wd\bottomcornermotif}(\paperwidth-\wd\bottomcornermotif,\paperheight-\wd\bottomcornermotif)
+  \usebox{\bottomcornermotif}
+  \end{textblock*}}
+}
+
+\renewtcolorbox{alertblock}[2][]{enhanced,
+  frame code={\tikzset{pgfornamentstyle/.style={line width=0pt}}
+    \path[draw=alerted text.fg,line width=1bp](frame.south west) rectangle (frame.north east);
+    \path[fill=alerted text.bg] ([shift={(0.5bp,0.5bp)}]frame.north east) rectangle ++ (-20bp,-20bp);
+    \node[anchor=north east,inner sep=0pt,outer sep=0pt,shift={(0.5bp,0.5bp)}] at (frame.north east) {\pgfornamenthan[width=20bp,color=alerted text.fg,symmetry=v]{3}};
+    \path[fill=alerted text.bg] ([shift={(-0.5bp,-0.5bp)}]frame.south west) rectangle ++ (20bp,20bp);
+    \node[anchor=south west,inner sep=0pt,outer sep=0pt,shift={(-0.5bp,-0.5bp)}] at (frame.south west) {\pgfornamenthan[width=20bp,color=alerted text.fg,symmetry=h]{3}};
+    },
+  interior titled code = {},
+  title code = {},
+  segmentation code = {},
+  colframe = alerted text.fg,
+  coltitle = alerted text.fg!70!black,
+  colback = alerted text.bg,
+  halign title = flush center,
+  fonttitle=\kaishu\romankai\bfseries,
+  title = #2,
+  #1
+}
+
+\renewtcolorbox{exampleblock}[2][]{enhanced,
+  frame code={\tikzset{pgfornamentstyle/.style={line width=0pt}}
+    \path[draw=example text.fg,line width=1bp](frame.south west) rectangle (frame.north east);
+    \path[fill=example text.bg] ([shift={(0.5bp,0.5bp)}]frame.north east) rectangle ++ (-20bp,-20bp);
+    \node[anchor=north east,inner sep=0pt,outer sep=0pt,shift={(0.5bp,0.5bp)}] at (frame.north east) {\pgfornamenthan[width=20bp,color=example text.fg,symmetry=v]{3}};
+    \path[fill=example text.bg] ([shift={(-0.5bp,-0.5bp)}]frame.south west) rectangle ++ (20bp,20bp);
+    \node[anchor=south west,inner sep=0pt,outer sep=0pt,shift={(-0.5bp,-0.5bp)}] at (frame.south west) {\pgfornamenthan[width=20bp,color=example text.fg,symmetry=h]{3}};
+    },
+  interior titled code = {},
+  title code = {},
+  segmentation code = {},
+  colframe = example text.fg,
+  coltitle = example text.fg!70!black,
+  colback = example text.bg,
+  halign title = flush center,
+  fonttitle=\kaishu\romankai\bfseries,
+  title = #2,
+  #1
+}
+
+\usebeamercolor{block title}
+\renewtcolorbox{block}[2][]{enhanced,
+  frame code={\tikzset{pgfornamentstyle/.style={line width=0pt}}
+    \usebeamercolor{block title}
+    \path[draw=block title.fg,line width=1bp](frame.south west) rectangle (frame.north east);
+    \path[fill=block title.bg] ([shift={(0.5bp,0.5bp)}]frame.north east) rectangle ++ (-20bp,-20bp);
+    \node[anchor=north east,inner sep=0pt,outer sep=0pt,shift={(0.5bp,0.5bp)}] at (frame.north east) {\pgfornamenthan[width=20bp,color=block title.fg,symmetry=v]{3}};
+    \path[fill=block title.bg] ([shift={(-0.5bp,-0.5bp)}]frame.south west) rectangle ++ (20bp,20bp);
+    \node[anchor=south west,inner sep=0pt,outer sep=0pt,shift={(-0.5bp,-0.5bp)}] at (frame.south west) {\pgfornamenthan[width=20bp,color=block title.fg,symmetry=h]{3}};
+    },
+  interior titled code = {},
+  title code = {},
+  segmentation code = {},
+  colframe = block title.fg,
+  coltitle = block title.fg!70!black,
+  colback = block title.bg,
+  halign title = flush center,
+  fonttitle=\kaishu\romankai\bfseries,
+  title = #2,
+  #1
+}
+
+\AtBeginSection{\begingroup
+  \setbeamercolor{normal text}{bg=palette secondary.fg!20}
+  \setbeamertemplate{background}{}
+  \begin{frame}\zhnumsetup{style=Financial}\sectionpage\end{frame}
+  \endgroup
+}
+\renewcommand{\thesection}{\chinese{section}}
+\setbeamercolor{section page}{fg=structure}
+\setbeamertemplate{section page}{\centering
+  \begin{textblock*}{\paperwidth}[0.5,0](0.5\paperwidth,-0.15\paperheight)
+  \tikzset{pgfornamentstyle/.style={opacity=.5,inner sep=0pt,outer sep=0pt,very thick,draw=palette secondary.fg!70!structure.fg}}
+  \usebeamercolor{palette secondary}
+  \pgfornamenthan[width=1.3\paperheight,color=palette secondary.fg]{53}
+  \end{textblock*}
+  \begin{tikzpicture}
+    \usebeamercolor{palette secondary}
+    \foreach \i in {45, 90, ..., 360}
+      \node[inner sep=5.5bp,rotate=-\i,anchor=north west]{\pgfornamenthan[width=1.2\ccwd,color=palette secondary.fg!70!structure.fg]{77}};
+    \node[font=\usebeamerfont{section name},structure.fg]{\thesection};
+  \end{tikzpicture}\par
+  \parbox{\paperheight}{\centering\usebeamerfont{section title}\insertsection}\par\bigskip
+  \pgfornamenthan[color=palette secondary.fg!70!structure.fg,width=.5\paperheight,symmetry=h]{60}\par
+}
+
+\preto\maketitle{\begingroup
+  \setbeamercolor{normal text}{bg=天青色!20}
+  \addtobeamertemplate{background}{\vadjust{%
+    \begin{textblock*}{\paperwidth}(\paperwidth-.36\paperheight,\paperheight-.36\paperheight)
+    \tikzset{pgfornamentstyle/.style={opacity=.25,inner sep=0pt,outer sep=0pt,very thick,draw=palette secondary.fg!70!structure.fg}}
+    \usebeamercolor{palette secondary}
+    \pgfornamenthan[width=.35\paperheight,color=palette secondary.fg,symmetry=v]{74}
+    \end{textblock*}
+    \begin{textblock*}{\paperwidth}(\paperwidth-.55\paperheight,0.5\paperheight)
+    \tikzset{pgfornamentstyle/.style={opacity=.5,inner sep=0pt,outer sep=0pt,very thick,draw=palette secondary.fg!70!structure.fg}}
+    \usebeamercolor{palette secondary}
+    \pgfornamenthan[width=\paperheight,color=palette secondary.fg]{49}
+    \end{textblock*}
+  }}{}
+}
+
+\appto\maketitle{\endgroup}
+
+\titlegraphic{\pgfornamenthan[width=2\ccwd,color=alerted text.fg,symmetry=v]{64}\pgfornamenthan[width=2\ccwd,color=alerted text.fg]{56}\pgfornamenthan[width=2\ccwd,color=alerted text.fg]{64}}
+
+\addtobeamertemplate{section in toc}{\raisebox{.2\ccwd}{\usebox{\bulletboxone}}\hskip\labelsep}{}
+
+\renewcommand{\qedsymbol}{\tikzset{tikzornamentstyle/.style={line width=0pt}}\raisebox{.3\ccwd}{\pgfornamenthan[width=\ccwd,color=alerted text.fg]{57}}}

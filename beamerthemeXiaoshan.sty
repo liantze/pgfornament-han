@@ -1,9 +1,10 @@
-% beamerthemeXiaoshan.sty v1.0 2018/04/09
+% beamerthemeXiaoshan.sty v1.1 2023/04/23
 % by LianTze Lim (liantze@gmail.com)
 \ProvidesPackage{beamerthemeXiaoshan}
 
 \usetheme[progressbar=frametitle]{metropolis}
-
+%v 1.1: fix space after block titles
+\patchcmd{\metropolis@block}{\nointerlineskip}{}{}{}
 \RequirePackage{pgfornament-han}
 \RequirePackage{tikz}
 \usetikzlibrary{decorations,decorations.markings}

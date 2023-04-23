@@ -104,7 +104,7 @@
 
 \title{汉风图纹 \texttt{pgfornament-han}}
 \author{林莲枝、张晨南}
-\date{2019/08/10\\\url{https://github.com/liantze/pgfornament-han}}
+\date{2023/04/23\\\url{https://github.com/liantze/pgfornament-han}}
 
 \begin{document}
 
@@ -880,7 +880,7 @@
 \bigskip
 
 \begin{tcblisting}{listing side comment,title={使用范例},pdf comment={xiaoshan-sample.pdf}}
-\documentclass{ctexbeamer}
+\documentclass[linespread=1.2,aspectratio=1610]{ctexbeamer}
 
 \usetheme{Xiaoshan}
 
@@ -917,7 +917,7 @@
 \bigskip
 
 \begin{tcblisting}{listing side comment,title={使用范例},pdf comment={heavenlyclouds-sample.pdf}}
-\documentclass{ctexbeamer}
+\documentclass[aspectratio=1610,linespread=1.2]{ctexbeamer}
 \usetheme{HeavenlyClouds}
 
 \author{林莲枝}
@@ -972,5 +972,42 @@
 
 \end{itemize}
 
+\section{天青 Beamer 主题 Tian Qing Beamer Theme \texttt{beamerthemeTianqing.sty}}
+
+几年前看到一个很喜欢的舞台演出，根据个人印象做的一个Beamer主题。本来想取名「青花瓷」的。不过始终没能力重现出来那种感觉啦，眼高手低，惭愧。
+
+（话说拿这个模板去做科研学术性报告，真的不会被导师丢出来吗。）
+
+
+\bigskip
+
+\begin{tcblisting}{listing side comment,title={使用范例},pdf comment={tianqing-sample.pdf}}
+\documentclass[aspectratio=1610,linespread=1.2]{ctexbeamer}
+\usetheme{TianQing}
+
+\author{林莲枝}
+\title{天青Beamer主题}
+\subtitle{\texttt{pgfornament-han}附录福利}
+
+\begin{document}
+
+\begin{frame}
+  \maketitle
+\end{frame}
+
+\section{基本测试}
+
+\begin{frame}{天青色等烟雨，而我在等你}
+    \begin{itemize}
+        \item 炊烟袅袅升起， 隔江千万里。...
+    \end{itemize}
+\end{frame}
+...
+\end{document}
+\end{tcblisting}
+
+如果本地电脑上有比较漂亮的美术字体或书法字体，不妨自己设置一下zhkai，也许会有让人惊喜的效果。例：
+
+\mintinline{latex}|\setCJKfamilyfont{zhkai}{Xingkai SC}|
 
 \end{document}
