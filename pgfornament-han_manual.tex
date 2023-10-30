@@ -103,7 +103,7 @@
 
 \title{汉风图纹 \texttt{pgfornament-han}}
 \author{林莲枝、张晨南}
-\date{2023/04/23\\\url{https://github.com/liantze/pgfornament-han}}
+\date{2023/10/29\\\url{https://github.com/liantze/pgfornament-han}}
 
 \begin{document}
 
@@ -1988,6 +1988,7 @@
 \end{document}
 \end{tcblisting}
 
+可以自行查阅\href{https://ctan.org/pkg/beamertheme-metropolis}{Metropolis}的详细宏包手册，有很多可客制化的机制，包括各种元素的配色。
 
 \clearpage
 
@@ -2051,8 +2052,18 @@
     \node {\pgfornamenthan[width=1.25cm,color=殷红]{56}};
   \end{tikzpicture} \emph{效果有可能有点狂，请视场合斟酌使用。}
 
+  \item 一些可以自己更改的颜色：
+  \begin{minted}{latex}
+  \setbeamercolor{structure}{fg=绀青}
+  \setbeamercolor{headline}{fg=群青}
+  \setbeamercolor{page number in head/foot}{fg=藏青}
+  \setbeamercolor{normal text}{bg=淡青}
+  \setbeamercolor{alerted text}{fg=正黄}
+  \setbeamercolor{example text}{fg=绿沉}
+  \end{minted}
 \end{itemize}
 
+\clearpage
 \section{天青 Beamer 主题 Tian Qing Beamer Theme \texttt{beamerthemeTianqing.sty}}
 
 几年前看到一个很喜欢的舞台演出，根据个人印象做的一个Beamer主题。本来想取名「青花瓷」的。不过始终没能力重现出来那种感觉啦，眼高手低，惭愧。
@@ -2090,5 +2101,16 @@
 如果本地电脑上有比较漂亮的美术字体或书法字体，不妨自己设置一下zhkai，也许会有让人惊喜的效果。例：
 
 \mintinline{latex}|\setCJKfamilyfont{zhkai}{Xingkai SC}|
+
+一些可以自己更改的颜色：
+\begin{minted}{latex}
+\setbeamercolor{structure}{fg=墨色}
+\setbeamercolor{section page}{fg=紫檀}
+\setbeamercolor{top deco}{fg=老银}
+\setbeamercolor{normal text}{bg=铅白}
+\setbeamercolor{alerted text}{fg=玄色}
+\setbeamercolor{example text}{fg=鸦青}
+\setbeamercolor{block title}{fg=绀青}
+\end{minted}
 
 \end{document}

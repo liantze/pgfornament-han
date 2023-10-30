@@ -1,4 +1,4 @@
-% beamerthemeXiaoshan.sty v1.0 2023/04/23
+% beamerthemeXiaoshan.sty v1.01 2023/10/29
 % by LianTze Lim (liantze@gmail.com)
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerthemeTianQing}
@@ -25,7 +25,9 @@
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{frametitle continuation}[from second]
 \setbeamercolor{structure}{fg=正青}
-\setbeamercolor{palette secondary}{fg=天青色}
+\setbeamercolor{section page deco}{fg=天青色}
+\setbeamercolor{top deco}{fg=蓝灰色}
+\setbeamercolor{deco outline}{fg=墨灰}
 \setbeamercolor{normal text}{bg=精白}
 
 \setbeamerfont{frametitle}{family=\romankai\kaishu,size=\LARGE}
@@ -39,20 +41,27 @@
 \setbeamercolor{block title}{fg=宝蓝}
 \setbeamercolor{mini frame}{bg=天青色}
 
-\newsavebox{\bulletboxone}
-\savebox{\bulletboxone}{\usebeamercolor[fg]{structure}\tikz\node[line width=0pt,inner sep=0pt,outer sep=0pt]{\pgfornamenthan[height=1ex]{43}};}
+\AddToHook{begindocument/before}{%
+  \newsavebox{\bulletboxone}
+  \savebox{\bulletboxone}{\usebeamercolor[fg]{structure}\tikz\node[line width=0pt,inner sep=0pt,outer sep=0pt]{\pgfornamenthan[height=1ex]{43}};}
 
-\newsavebox{\bulletboxtwo}
-\savebox{\bulletboxtwo}{\usebeamercolor[fg]{structure}\tikz\node[line width=0pt,inner sep=0pt,outer sep=0pt]{\pgfornamenthan[height=1ex]{41}};}
+  \newsavebox{\bulletboxtwo}
+  \savebox{\bulletboxtwo}{\usebeamercolor[fg]{structure}\tikz\node[line width=0pt,inner sep=0pt,outer sep=0pt]{\pgfornamenthan[height=1ex]{41}};}
 
-\newsavebox{\bulletboxthree}
-\savebox{\bulletboxthree}{\usebeamercolor[fg]{structure}\tikz\node[line width=0pt,inner sep=0pt,outer sep=0pt]{\pgfornamenthan[height=1ex]{33}};}
+  \newsavebox{\bulletboxthree}
+  \savebox{\bulletboxthree}{\usebeamercolor[fg]{structure}\tikz\node[line width=0pt,inner sep=0pt,outer sep=0pt]{\pgfornamenthan[height=1ex]{33}};}
 
-\newsavebox{\topcornermotif}
-\savebox{\topcornermotif}{\tikzset{pgfornamentstyle/.style={rotate=30,draw=墨灰,color=蓝灰色,opacity=.2,inner sep=0pt,ultra thick}}\pgfornamenthan[width=.5\paperheight]{64}}
+  \newsavebox{\topcornermotif}
+  \savebox{\topcornermotif}{%
+    \usebeamercolor{deco outline}%
+    \usebeamercolor{top deco}%
+    \tikzset{pgfornamentstyle/.style={rotate=30,color=top deco.fg,draw=deco outline.fg,opacity=.2,inner sep=0pt,ultra thick}}\pgfornamenthan[width=.5\paperheight]{64}}
 
-\newsavebox{\bottomcornermotif}
-\savebox{\bottomcornermotif}{\tikzset{pgfornamentstyle/.style={draw=墨灰,color=正青,opacity=.9,inner sep=0pt,very thick}}\pgfornamenthan[width=.2\paperheight,symmetry=v]{74}}
+  \newsavebox{\bottomcornermotif}
+  \savebox{\bottomcornermotif}{%
+    \usebeamercolor{structure}%
+    \tikzset{pgfornamentstyle/.style={color=structure.fg,opacity=.9,inner sep=0pt,very thick}}\pgfornamenthan[width=.2\paperheight,symmetry=v]{74}}%
+}
 
 \setbeamertemplate{itemize item}{\raisebox{.08\ccwd}{\usebox{\bulletboxone}}}
 \setbeamertemplate{itemize subitem}{\raisebox{.08\ccwd}{\usebox{\bulletboxtwo}}}
@@ -147,7 +156,8 @@
 }
 
 \AtBeginSection{\begingroup
-  \setbeamercolor{normal text}{bg=palette secondary.fg!20}
+  \usebeamercolor{section page deco}
+  \setbeamercolor{normal text}{bg=section page deco.fg!20}
   \setbeamertemplate{background}{}
   \begin{frame}\zhnumsetup{style=Financial}\sectionpage\end{frame}
   \endgroup
@@ -156,32 +166,32 @@
 \setbeamercolor{section page}{fg=structure}
 \setbeamertemplate{section page}{\centering
   \begin{textblock*}{\paperwidth}[0.5,0](0.5\paperwidth,-0.15\paperheight)
-  \tikzset{pgfornamentstyle/.style={opacity=.5,inner sep=0pt,outer sep=0pt,very thick,draw=palette secondary.fg!70!structure.fg}}
-  \usebeamercolor{palette secondary}
-  \pgfornamenthan[width=1.3\paperheight,color=palette secondary.fg]{53}
+  \tikzset{pgfornamentstyle/.style={opacity=.5,inner sep=0pt,outer sep=0pt,very thick,draw=section page deco.fg!70!structure.fg}}
+  \usebeamercolor{section page deco}
+  \pgfornamenthan[width=1.3\paperheight,color=section page deco.fg]{53}
   \end{textblock*}
   \begin{tikzpicture}
-    \usebeamercolor{palette secondary}
+    \usebeamercolor{section page deco}
     \foreach \i in {45, 90, ..., 360}
-      \node[inner sep=5.5bp,rotate=-\i,anchor=north west]{\pgfornamenthan[width=1.2\ccwd,color=palette secondary.fg!70!structure.fg]{77}};
+      \node[inner sep=5.5bp,rotate=-\i,anchor=north west]{\pgfornamenthan[width=1.2\ccwd,color=section page deco.fg!70!structure.fg]{77}};
     \node[font=\usebeamerfont{section name},structure.fg]{\thesection};
   \end{tikzpicture}\par
   \parbox{\paperheight}{\centering\usebeamerfont{section title}\insertsection}\par\bigskip
-  \pgfornamenthan[color=palette secondary.fg!70!structure.fg,width=.5\paperheight,symmetry=h]{60}\par
+  \pgfornamenthan[color=section page deco.fg!70!structure.fg,width=.5\paperheight,symmetry=h]{60}\par
 }
 
 \preto\maketitle{\begingroup
-  \setbeamercolor{normal text}{bg=天青色!20}
+  \setbeamercolor{normal text}{bg=section page deco.fg!20}
   \addtobeamertemplate{background}{\vadjust{%
     \begin{textblock*}{\paperwidth}(\paperwidth-.36\paperheight,\paperheight-.36\paperheight)
-    \tikzset{pgfornamentstyle/.style={opacity=.25,inner sep=0pt,outer sep=0pt,very thick,draw=palette secondary.fg!70!structure.fg}}
-    \usebeamercolor{palette secondary}
-    \pgfornamenthan[width=.35\paperheight,color=palette secondary.fg,symmetry=v]{74}
+    \tikzset{pgfornamentstyle/.style={opacity=.25,inner sep=0pt,outer sep=0pt,very thick,draw=section page deco.fg!70!structure.fg}}
+    \usebeamercolor{section page deco}
+    \pgfornamenthan[width=.35\paperheight,color=section page deco.fg,symmetry=v]{74}
     \end{textblock*}
     \begin{textblock*}{\paperwidth}(\paperwidth-.55\paperheight,0.5\paperheight)
-    \tikzset{pgfornamentstyle/.style={opacity=.5,inner sep=0pt,outer sep=0pt,very thick,draw=palette secondary.fg!70!structure.fg}}
-    \usebeamercolor{palette secondary}
-    \pgfornamenthan[width=\paperheight,color=palette secondary.fg]{49}
+    \tikzset{pgfornamentstyle/.style={opacity=.5,inner sep=0pt,outer sep=0pt,very thick,draw=section page deco.fg!70!structure.fg}}
+    \usebeamercolor{section page deco}
+    \pgfornamenthan[width=\paperheight,color=section page deco.fg]{49}
     \end{textblock*}
   }}{}
 }

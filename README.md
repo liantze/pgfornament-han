@@ -1,4 +1,4 @@
-# pgfornament-han 2023/04/23
+# pgfornament-han 2023/10/29
 A pgfornament library for Chinese traditional motifs and patterns.
 
 以 pgfornament 宏包的机制，实现绘制汉风图纹。在此基础上设计了三款beamer主题：「萧山」(XiaoShan)、「神马浮云」(Heavenly Clouds)、「天青」(TianQing)。

@@ -1,4 +1,4 @@
-% beamerthemeHeavenlyClouds.sty v1.1 2019/07/24
+% beamerthemeHeavenlyClouds.sty v1.1.1 2023/10/29
 % by LianTze Lim (liantze@gmail.com)
 \ProvidesPackage{beamerthemeHeavenlyClouds}
 
@@ -94,12 +94,16 @@
   \fill[headline.fg] (\clouds@progressinheadfoot,1.25em) circle (2pt);
   }%
 }
-\newbox{\clouds@shenma}
-\savebox{\clouds@shenma}{%
-  \usebeamercolor[fg]{headline}%
-  \tikzset{pgfornamentstyle/.style={line width=0pt}}%
-  \pgfornamenthan[width=2.5em]{78}%
+
+\AddToHook{begindocument/before}{%
+  \newbox{\clouds@shenma}
+  \savebox{\clouds@shenma}{%
+    \usebeamercolor[fg]{headline}%
+    \tikzset{pgfornamentstyle/.style={line width=0pt}}%
+    \pgfornamenthan[width=2.5em]{78}%
+  }
 }
+
 \newcommand{\shenmaprogressmarker}{%
   \renewcommand{\clouds@progressmarker}{%
   \clip (-1.3em,4em) rectangle (\paperwidth,0pt);
