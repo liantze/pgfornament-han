@@ -1,4 +1,4 @@
-% beamerthemeXiaoshan.sty v1.01 2023/10/29
+% beamerthemeXiaoshan.sty v1.02 2024/09/19
 % by LianTze Lim (liantze@gmail.com)
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerthemeTianQing}
@@ -35,11 +35,19 @@
 \setbeamerfont{section name}{family=\kaishu,size=\Large}
 \setbeamerfont{section title}{family=\kaishu,size=\huge}
 \setbeamerfont{section in toc}{family=\kaishu,size=\large}
+\setbeamerfont{block title}{family=\kaishu\romankai,series=\bfseries}
 
 \setbeamercolor{alerted text}{fg=樱桃色}
 \setbeamercolor{example text}{fg=绿沉}
 \setbeamercolor{block title}{fg=宝蓝}
 \setbeamercolor{mini frame}{bg=天青色}
+
+\newlength{\TQTopDecoWidth}
+\newlength{\TQBottomDecoWidth}
+\setlength{\TQTopDecoWidth}{.5\paperheight}
+\setlength{\TQBottomDecoWidth}{.2\paperheight}
+\newcommand{\TQTopDecoOpacity}{.2}
+\newcommand{\TQBottomDecoOpacity}{.9}
 
 \AddToHook{begindocument/before}{%
   \newsavebox{\bulletboxone}
@@ -55,12 +63,12 @@
   \savebox{\topcornermotif}{%
     \usebeamercolor{deco outline}%
     \usebeamercolor{top deco}%
-    \tikzset{pgfornamentstyle/.style={rotate=30,color=top deco.fg,draw=deco outline.fg,opacity=.2,inner sep=0pt,ultra thick}}\pgfornamenthan[width=.5\paperheight]{64}}
+    \tikzset{pgfornamentstyle/.style={rotate=30,color=top deco.fg,draw=deco outline.fg,opacity=\TQTopDecoOpacity,inner sep=0pt,ultra thick}}\pgfornamenthan[width=\TQTopDecoWidth]{64}}
 
   \newsavebox{\bottomcornermotif}
   \savebox{\bottomcornermotif}{%
     \usebeamercolor{structure}%
-    \tikzset{pgfornamentstyle/.style={color=structure.fg,opacity=.9,inner sep=0pt,very thick}}\pgfornamenthan[width=.2\paperheight,symmetry=v]{74}}%
+    \tikzset{pgfornamentstyle/.style={color=structure.fg,opacity=\TQBottomDecoOpacity,inner sep=0pt,very thick}}\pgfornamenthan[width=\TQBottomDecoWidth,symmetry=v]{74}}%
 }
 
 \setbeamertemplate{itemize item}{\raisebox{.08\ccwd}{\usebox{\bulletboxone}}}
@@ -108,7 +116,7 @@
   coltitle = alerted text.fg!70!black,
   colback = alerted text.bg,
   halign title = flush center,
-  fonttitle=\kaishu\romankai\bfseries,
+  fonttitle=\usebeamerfont{block title alerted},
   title = #2,
   #1
 }
@@ -128,7 +136,7 @@
   coltitle = example text.fg!70!black,
   colback = example text.bg,
   halign title = flush center,
-  fonttitle=\kaishu\romankai\bfseries,
+  fonttitle=\usebeamerfont{block title example},
   title = #2,
   #1
 }
@@ -150,7 +158,7 @@
   coltitle = block title.fg!70!black,
   colback = block title.bg,
   halign title = flush center,
-  fonttitle=\kaishu\romankai\bfseries,
+  fonttitle=\usebeamerfont{block title},
   title = #2,
   #1
 }
