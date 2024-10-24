@@ -98,10 +98,11 @@
 \fancypagestyle{plain}{\pagestyle{fancy}}
 
 \usepackage[colorlinks]{hyperref}
+\usepackage{cleveref}
 
 \title{汉风图纹 \texttt{pgfornament-han}}
 \author{林莲枝、张晨南}
-\date{2024/09/19\\\url{https://github.com/liantze/pgfornament-han}}
+\date{2024/10/22\\\url{https://github.com/liantze/pgfornament-han}}
 
 \begin{document}
 
@@ -109,7 +110,7 @@
 
 \begin{abstract}
 利用 \texttt{pgfornament} 宏包可以在 \LaTeX{} 文件里便捷地画出十分典雅漂亮的、欧式风格的花纹。（详情请自行访问 \url{http://ctan.org/pkg/pgfornament}）
- \texttt{pgfornament-han} 宏包的用意，正是为了尝试用 \texttt{pgfornament} 的已有机制，提供一些汉风的传统图纹。所有图纹均由\emph{张晨南}以 CAD 程式定稿、TikZ 绘制，再由\emph{林莲枝}转为适合 \texttt{pgfornament} 机制使用的宏包代码。我们也基于这些图纹尝试设计了一些beamer幻灯片及海报主题，详见\hyperref[appendix-start]{附录}。
+ \texttt{pgfornament-han} 宏包的用意，正是为了尝试用 \texttt{pgfornament} 的已有机制，提供一些汉风的传统图纹。所有图纹均由\emph{张晨南}以 CAD 程式定稿、TikZ 绘制，再由\emph{林莲枝}转为适合 \texttt{pgfornament} 机制使用的宏包代码。我们也基于这些图纹尝试设计了一些beamer幻灯片及海报主题，详见附录\ref{app:beamer-xiaoshan}、\ref{app:beamer-heavenlyclouds}、\ref{app:beamer-tianqing}。
 \end{abstract}
 
 \part{基本用法}
@@ -516,6 +517,7 @@
 \phantomsection\label{appendix-start}\addcontentsline{toc}{part}{附录}
 
 \section{传统中国颜色 \texttt{cncolours.sty}}
+\label{app:cncolours}
 
 \begingroup
 
@@ -1953,6 +1955,7 @@
 \clearpage
 
 \section{萧山 Beamer 主题 Xiaoshan Beamer Theme \texttt{beamerthemeXiaoshan.sty}}
+\label{app:beamer-xiaoshan}
 
 这个Beamer主题是以 \href{https://ctan.org/pkg/beamertheme-metropolis}{Metropolis} 为基础，用 \texttt{cncolours.sty} 调了一下颜色，加入少许汉风纹样。请参考\texttt{xiaoshan-beamer-sample.tex}示范文档。
 
@@ -2020,6 +2023,7 @@ scale=1.4]{beamerposter}
 \clearpage
 
 \section{神马浮云 Beamer 主题 Heavenly Clouds Beamer Theme \texttt{beamerthemeHeavenlyClouds.sty}}
+\label{app:beamer-heavenlyclouds}
 
 这个Beamer主题是我一次病中摸鱼摸出来的，脑洞略大。请参考\texttt{heavenlyclouds-beamer-sample.tex}示范文档。每一页的背景的云彩纹样，位置、大小、深浅都是随机的，所以如果内容页数比较多，编译时运算可能会比较花时间，请自行斟酌使用此主题。
 
@@ -2125,6 +2129,7 @@ scale=1.5]{beamerposter}
 \clearpage
 
 \section{天青 Beamer 主题 Tian Qing Beamer Theme \texttt{beamerthemeTianqing.sty}}
+\label{app:beamer-tianqing}
 
 几年前看到一个\href{https://www.bilibili.com/video/BV1my4y1B7Vx/?p=156}{很喜欢的舞台演出}，根据个人印象做的一个Beamer主题。本来想取名「青花瓷」的。不过始终没能力重现出来那种感觉啦，眼高手低，惭愧。请参考\texttt{tianqing-beamer-sample.tex}示范文档。
 
