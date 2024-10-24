@@ -1,7 +1,4 @@
-% !TEX option = --shell-escape
-% !TEX program = xelatex
 \documentclass[fontset=fandol]{ctexart}
-
 \setmainfont{Linux Libertine O}
 \setsansfont{Linux Biolinum O}
 
@@ -1957,11 +1954,11 @@
 
 \section{萧山 Beamer 主题 Xiaoshan Beamer Theme \texttt{beamerthemeXiaoshan.sty}}
 
-这个Beamer主题是以 \href{https://ctan.org/pkg/beamertheme-metropolis}{Metropolis} 为基础，用 \texttt{cncolours.sty} 调了一下颜色，加入少许汉风纹样。
+这个Beamer主题是以 \href{https://ctan.org/pkg/beamertheme-metropolis}{Metropolis} 为基础，用 \texttt{cncolours.sty} 调了一下颜色，加入少许汉风纹样。请参考\texttt{xiaoshan-beamer-sample.tex}示范文档。
 
 \bigskip
 
-\begin{tcblisting}{listing side comment,title={使用范例},pdf comment={xiaoshan-sample.pdf}}
+\begin{tcblisting}{listing side comment,title={使用范例},pdf comment={samples/xiaoshan-beamer-sample.pdf}}
 \documentclass[linespread=1.2,aspectratio=1610]{ctexbeamer}
 
 \usetheme{Xiaoshan}
@@ -1991,15 +1988,44 @@
 
 可以自行查阅\href{https://ctan.org/pkg/beamertheme-metropolis}{Metropolis}的详细宏包手册，有很多可客制化的机制，包括各种元素的配色。
 
+这些设置（以及beamer本身自带的设置参数）经过一些适当更改，也可以配合\texttt{beamerposter}宏包制作学术海报。请参考 \texttt{xiaoshan-poster-sample.tex} 示范文档。
+
+\begin{tcblisting}{listing side comment,title={海报范例},image comment={width=\hsize}{samples/xiaoshan-poster-sample.pdf}}
+\documentclass[t]{ctexbeamer}
+\usepackage[size=a4,orientation=portrait,
+scale=1.4]{beamerposter}
+\usetheme{Xiaoshan} 
+
+\setbeamertemplate{frame numbering}[none]
+\setbeamerfont{frametitle}{series=\mdseries\huge}
+% ...以及其它适当改动，
+% 详见tianqing-poster.tex
+
+\title{当萧山beamer主题拿来做海报}
+\author{作者甲、作者乙、作者丙}
+\begin{document}
+\begin{frame}
+\frametitle{\insertshorttitle}
+\framesubtitle{\insertshortauthor}
+\begin{block}{萧山城市图景}
+  \begin{itemize}
+  \item 长忆萧然山下县，去秋为客日招邀。
+  \item ...
+  \end{itemize}
+\end{block}
+\end{frame}
+\end{document}
+\end{tcblisting}
+
 \clearpage
 
 \section{神马浮云 Beamer 主题 Heavenly Clouds Beamer Theme \texttt{beamerthemeHeavenlyClouds.sty}}
 
-这个Beamer主题是我一次病中摸鱼摸出来的，脑洞略大。每一页的背景的云彩纹样，位置、大小、深浅都是随机的，所以如果内容页数比较多，编译时运算可能会比较花时间，请自行斟酌使用此主题。
+这个Beamer主题是我一次病中摸鱼摸出来的，脑洞略大。请参考\texttt{heavenlyclouds-beamer-sample.tex}示范文档。每一页的背景的云彩纹样，位置、大小、深浅都是随机的，所以如果内容页数比较多，编译时运算可能会比较花时间，请自行斟酌使用此主题。
 
 \bigskip
 
-\begin{tcblisting}{listing side comment,title={使用范例},pdf comment={heavenlyclouds-sample.pdf}}
+\begin{tcblisting}{listing side comment,title={使用范例},pdf comment={samples/heavenlyclouds-beamer-sample.pdf}}
 \documentclass[aspectratio=1610,linespread=1.2]{ctexbeamer}
 \usetheme{HeavenlyClouds}
 
@@ -2064,17 +2090,50 @@
   \end{minted}
 \end{itemize}
 
+这些设置（以及beamer本身自带的设置参数）经过一些适当更改，也可以配合\texttt{beamerposter}宏包制作学术海报。请参考 \texttt{heavenlyclouds-poster-sample.tex} 示范文档。
+
+\begin{tcblisting}{listing side comment,title={海报范例},image comment={width=\hsize}{samples/heavenlyclouds-poster-sample.pdf}}
+\documentclass[t,linespread=1.3]{ctexbeamer}
+\usepackage[size=a4,orientation=portrait,
+scale=1.5]{beamerposter}
+
+\usetheme{HeavenlyClouds}
+
+\setbeamerfont{frametitle}{size=\Huge}
+\setbeamerfont{framesubtitle}{size=\Large}
+\setbeamerfont{headline}{size=\small}
+\setbeamerfont{footline}{size=\small}
+% ...以及其它适当改动，
+% 详见heavenlyclouds-poster-sample.tex
+
+\title{当神马浮云beamer主题拿来做海报}
+\author{作者甲、作者乙、作者丙}
+\begin{document}
+\begin{frame}
+\frametitle{\insertshorttitle}
+\framesubtitle{\insertshortauthor}
+\begin{block}{套马的汉子你威武雄壮}
+  \begin{itemize}
+    \item 飞驰的骏马像疾风一样
+      \item ...
+    \end{itemize}
+\end{block}
+\end{frame}
+\end{document}
+\end{tcblisting}
+
+\clearpage
 
 \section{天青 Beamer 主题 Tian Qing Beamer Theme \texttt{beamerthemeTianqing.sty}}
 
-几年前看到一个\href{https://www.bilibili.com/video/BV1my4y1B7Vx/?p=156}{很喜欢的舞台演出}，根据个人印象做的一个Beamer主题。本来想取名「青花瓷」的。不过始终没能力重现出来那种感觉啦，眼高手低，惭愧。
+几年前看到一个\href{https://www.bilibili.com/video/BV1my4y1B7Vx/?p=156}{很喜欢的舞台演出}，根据个人印象做的一个Beamer主题。本来想取名「青花瓷」的。不过始终没能力重现出来那种感觉啦，眼高手低，惭愧。请参考\texttt{tianqing-beamer-sample.tex}示范文档。
 
 （话说拿这个模板去做科研学术性报告，真的不会被导师丢出来吗。）
 
 
 \bigskip
 
-\begin{tcblisting}{listing side comment,title={使用范例},pdf comment={tianqing-sample.pdf}}
+\begin{tcblisting}{listing side comment,title={使用范例},pdf comment={samples/tianqing-beamer-sample.pdf}}
 \documentclass[aspectratio=1610,linespread=1.2]{ctexbeamer}
 \usetheme{TianQing}
 
@@ -2124,18 +2183,18 @@
 \end{minted}
 \end{multicols}
 
-这些设置（以及beamer本身自带的设置参数）经过一些适当更改，也可以配合\texttt{beamerposter}宏包制作学术海报。请参考 \texttt{qianqing-poster.tex} 示范文档。
+这些设置（以及beamer本身自带的设置参数）经过一些适当更改，也可以配合\texttt{beamerposter}宏包制作学术海报。请参考 \texttt{tianqing-poster-sample.tex} 示范文档。
 
-\begin{tcblisting}{listing side comment,title={海报范例},image comment={width=\hsize}{tianqing-poster.pdf}}
+\begin{tcblisting}{listing side comment,title={海报范例},image comment={width=\hsize}{samples/tianqing-poster-sample.pdf}}
   \documentclass[t,linespread=1.2]{ctexbeamer}
   \usepackage[size=a4,orientation=portrait,
   scale=1.4]{beamerposter} 
-  \usetheme{TianQing}  
+  \usetheme{TianQing}
  
   \setbeamerfont{block title}{size=\Large}
   \setlength{\TQBottomDecoWidth}{0.2\paperwidth}
   % ...以及其它适当改动，
-  % 详见tianqing-poster.tex
+  % 详见tianqing-poster-sample.tex
  
   \title{当天青beamer主题拿来做海报}
   \author{作者甲、作者乙、作者丙}

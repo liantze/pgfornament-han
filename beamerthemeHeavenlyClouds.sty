@@ -1,4 +1,4 @@
-% beamerthemeHeavenlyClouds.sty v1.1.1 2023/10/29
+% beamerthemeHeavenlyClouds.sty v1.2 2024/10/15
 % by LianTze Lim (liantze@gmail.com)
 \ProvidesPackage{beamerthemeHeavenlyClouds}
 
@@ -24,6 +24,7 @@
 \renewcommand{\CJKrmdefault}{zhfs}
 
 \setbeamerfont{frametitle}{shape=\itshape,family=\lishu,series=\bfseries,size=\LARGE}
+\setbeamerfont{framesubtitle}{shape=\itshape,family=\lishu,series=\bfseries,size=\normalsize}
 % \setbeamercolor{frametitle}{fg=茜色}
 
 \setbeamerfont{title}{family=\lishu,series=\bfseries,size=\huge}
@@ -66,7 +67,8 @@
 }
 \appto{\maketitle}{\end{minipage}}
 
-
+\newcommand{\addheight}{\parbox{0pt}{\rule{0pt}{1.3\ccwd}}}
+% \setbeamerfont{block title}{series=\addheight}
 % \setbeamerfont{block title}{series=\centering}
 % \addtobeamertemplate{block alerted begin}{}{\centering}
 % \addtobeamertemplate{block example begin}{}{\centering}
@@ -95,25 +97,27 @@
   }%
 }
 
+\newlength{\ShenmaMarkerWidth}
+\setlength{\ShenmaMarkerWidth}{2.5em}
 \AddToHook{begindocument/before}{%
   \newbox{\clouds@shenma}
   \savebox{\clouds@shenma}{%
     \usebeamercolor[fg]{headline}%
     \tikzset{pgfornamentstyle/.style={line width=0pt}}%
-    \pgfornamenthan[width=2.5em]{78}%
+    \pgfornamenthan[width=\ShenmaMarkerWidth]{78}%
   }
 }
 
 \newcommand{\shenmaprogressmarker}{%
   \renewcommand{\clouds@progressmarker}{%
-  \clip (-1.3em,4em) rectangle (\paperwidth,0pt);
+  \clip (-1.3em,\dimexpr\ht\clouds@shenma + 4em\relax) rectangle (\paperwidth,0pt);
   \node[anchor=south,inner sep=1pt] at (\clouds@progressinheadfoot,1.25em)
   {\usebox{\clouds@shenma}};
   }
 }%
 
 
-\AtBeginDocument{%
+\AddToHook{begindocument/before}{%
   \shenmaprogressmarker
   \newbox{\clouds@title@deco}
   \savebox{\clouds@title@deco}{%
@@ -130,6 +134,9 @@
       \parbox{\dimexpr\clouds@frametitle@actualwidth-5em}{\centering\insertframetitle}%
       \hfill\raisebox{0.5ex}{\usebox{\clouds@title@deco}}%
     \end{minipage}\par%
+    % 2024-10-08 add frame subtitle
+    \smallskip%
+    {\centering\usebeamerfont{framesubtitle}\mbox{}\insertframesubtitle\par}%
   }
 
   \newbox{\clouds@smallhuiwen}
@@ -151,9 +158,8 @@
   \begin{tikzpicture}[decoration={markings, mark=between positions 0 and 1 step 2.5em
     with { \node[transform shape]{\usebox{\clouds@smallhuiwen}}; }} ]
   \path [postaction={decorate}] (0,0) -- (\paperwidth,0);
-  \draw[headline.fg!50,line width=0.6pt] (-1.25em,1.25em) -- (\paperwidth,1.25em);
+  \draw[headline.fg!50,line width=0.2ex] (-1.25em,1.25em) -- (\paperwidth,1.25em);
   \clouds@progressmarker
-  % \fill[headline.fg] (\clouds@progressinheadfoot,1.25em) circle (2pt); %<-- TODO
   \end{tikzpicture}
   }
 }
@@ -194,13 +200,17 @@
   \pgfmathsetmacro{\myx}{rnd * 0.8}
   \pgfmathsetmacro{\myy}{rnd * 0.8}
   \pgfmathtruncatemacro{\myorn}{random(0,1) + #1}
+  \begingroup
+  \ifodd \myorn \tikzset{pgfornamentstyle/.append style={line width=1pt]}} \fi
   \node at (\myx * \paperwidth, \myy * \paperheight) {\pgfornamenthan[
   color=normal text.bg!\myintensity!white,symmetry=\myflip,scale=\myscale]{\myorn}};
+  \endgroup
 }
+\newcommand{\BackgroundOrns}{\randorn{66}\randorn{68}\randorn{66}\randorn{70}\randorn{68}}
 \setbeamertemplate{background}{%
 \begin{tikzpicture}
   \clip (0,0) rectangle (\paperwidth,\paperheight);
-  \randorn{66}\randorn{68}\randorn{66}\randorn{70}\randorn{68}
+  \BackgroundOrns%
 \end{tikzpicture}
 }
 

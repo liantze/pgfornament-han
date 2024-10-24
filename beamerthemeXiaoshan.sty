@@ -1,4 +1,4 @@
-% beamerthemeXiaoshan.sty v1.1 2023/04/23
+% beamerthemeXiaoshan.sty v1.2 2024/10/19
 % by LianTze Lim (liantze@gmail.com)
 \ProvidesPackage{beamerthemeXiaoshan}
 
@@ -48,8 +48,9 @@
 \linespread{1.0}%
 \inserttitle%
 \hspace*{2em}\par%
-\vspace*{0.5em}
 }
+% Frankly I have no idea if this is the right way to shove in a framesubtitle for metropolis
+\apptocmd{\metropolis@frametitlestrut@end}{\ifx\insertframesubtitle\@empty\else\par\usebeamerfont{framesubtitle}\insertframesubtitle\par\vskip1.5ex\fi}{}{}
 
 \setbeamertemplate{subtitle}{
 \raggedleft%
