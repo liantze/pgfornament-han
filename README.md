@@ -17,11 +17,11 @@ a library suitable for use with the `pgfornament` package by LianTze Lim.
 [LaTeX Project Public License (LPPL 1.3c)](https://www.latex-project.org/lppl/lppl-1-3c/)
 
 ## Brief change log
-### 2024-10-22
-- Adds samples of posters using the Xiaoshan, HeavenCLouds and TianQing themes.
-
 ### 2026-11-11
 - Patch for make compatible with upstream changes in `pgfornament`.
+
+### 2024-10-22
+- Adds samples of posters using the Xiaoshan, HeavenCLouds and TianQing themes.
 
 ### 2023-10-29
 - `cncolours.sty` now has more colour names, loaded using package options `cas-rgb(*)` and `cas-cmyk(*)`
