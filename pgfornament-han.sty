@@ -1,4 +1,4 @@
-% pgfornament-han.sty v0.33 2019/08/10
+% pgfornament-han.sty v0.34 2026/11/11
 % Authors: pgf and LaTeX code by LIM LianTze
 %          based on CAD drawing by ZHANG Chennan
 
@@ -51,6 +51,8 @@
   {\begingroup}
   {\begingroup\def\ubb{\pgfusepath{use as bounding box}}}
   {}{}
+% v0.34: patch to make compatible with upstream pgfornament 1.4 changes 
+\patchcmd{\pgf@@ornamenthan}{\pgfornament@prefix}{}{}{}
 
 % \def\pgf@@ornamenthan#1{%
 % \begingroup
